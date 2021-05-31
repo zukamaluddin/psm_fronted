@@ -1,0 +1,172 @@
+Index: src/www/equipment/Create/register.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/www/equipment/Create/register.js	(revision fd1ba13f833e7be095b30bb34c780cf45fb7ec71)
++++ src/www/equipment/Create/register.js	(date 1598946288121)
+@@ -22,6 +22,10 @@
+ 
+ export default class CreateNew extends React.Component {
+     update = async () => {
++        let lastresit = this.state.resit;
++        if (this.state.jenisresit === 'Auto'){
++            lastresit = this.state.resit_no;
++        };
+ 
+         let data = {
+             valueId: this.state.id,
+@@ -30,7 +34,7 @@
+             valueJenisTempat: this.state.jenistempat,
+             valuePegawaiId: this.state.pegawai_id,
+             valueResit: this.state.resit,
+-            valueJenisResit: this.state.jenisresit,
++            valueJenisResit: lastresit,
+             valueDetail: this.state.attachment,
+             valueDelete: this.state.deletedetail,
+             valueOwner: this.state.pemilik_id,
+@@ -133,12 +137,19 @@
+     }
+ 
+     submit = async () => {
++        let lastresit = this.state.resit;
++        if (this.state.jenisresit === 'Auto'){
++            lastresit = this.state.resit_no;
++        };
++
++        console.log(this.state.resit)
++
+         let data = {
+             valueKawasan: this.state.kawasan,
+             valueTempat: this.state.tempat,
+             valueJenisTempat: this.state.jenistempat,
+             valuePegawaiId: this.state.pegawai_id,
+-            valueResit: this.state.resit,
++            valueResit: lastresit,
+             valueJenisResit: this.state.jenisresit,
+             valueDetail: this.state.attachment,
+             valueRepairer: this.state.pembaik_id,
+@@ -256,6 +267,7 @@
+             pembaik: global.repairerName,
+             pembaik_id: global.repairerId,
+             resit: '',
++            resit_no: '',
+             jenisresit: '',
+             rowUpdate: '',
+             idUpdate: '',
+@@ -403,7 +415,7 @@
+                             kawasan_code: result.data.kawasan_code,
+                             pembaik: result.data.pembaik,
+                             pembaik_id: result.data.pembaik_id,
+-                            resit: result.data.resit,
++                            resit: result.data.resit_no,
+                             jenisresit: result.data.jenisresit,
+                             attachment: result.data.detail,
+                             buttonUpdate: true,
+@@ -411,7 +423,7 @@
+                         });
+                         if (result.data.jenisresit === 'Auto'){
+                             this.setState({
+-                                resit: 'DBMS/' + result.data.kawasan_code + '/' + result.data.resit
++                                resit: 'DBMS/' + result.data.kawasan_code + '/' + result.data.resit_no
+                             })
+                         }
+ 
+@@ -473,6 +485,7 @@
+             .then((response) => response.json())
+             .then((result) => {
+                 this.setState({
++                    resit_no: result.data,
+                     resit: 'DBMS/' + this.state.kawasan_code + '/' + result.data
+                 })
+ 
+@@ -480,7 +493,8 @@
+         }
+         else{
+             this.setState({
+-                    resit: ''
++                    resit: '',
++                    resit_no: ''
+                 })
+         }
+ 
+@@ -623,7 +637,7 @@
+ 
+     reset() {
+         this.setState({
+-            kawasan: '',
++            // kawasan: '',
+             jenis_id: '',
+             lain_id: '',
+             kategori_id: '',
+@@ -644,11 +658,12 @@
+             jenisstikerlama: '',
+             tempat: '',
+             jenistempat: '',
+-            pegawai: '',
+-            pegawai_id: '',
++            // pegawai: '',
++            // pegawai_id: '',
+             pemilik: '',
+             pemilik_id: '',
+             resit: '',
++            resit_no: '',
+             jenisresit: '',
+             description: '',
+             priority: 'Low',
+@@ -1112,7 +1127,7 @@
+                                                             <Input type="text" value={this.state.resit} name="name"
+                                                                    value={this.state.resit}
+                                                                    onChange={event => {
+-                                                                       this.setState({resit: event.target.value})
++                                                                       this.setState({resit: event.target.value});
+                                                                    }} placeholder={'Taip disini'}
+                                                                    invalid={this.state.nameValid}/>
+                                                         </Col>
+@@ -1599,7 +1614,7 @@
+                                             </Button>
+                                             }
+                                             {this.state.buttonSave &&
+-                                            <Button color="danger" className='mr-1 btn-icon btn-shadow btn-outline'
++                                            <Button color="info" className='mr-1 btn-icon btn-shadow btn-outline'
+                                                     outline
+                                                     onClick={this.reset}>
+                                                 <i className="pe-7s-refresh-2 btn-icon-wrapper"> </i>Set Semula
+Index: src/www/equipment/List/index.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/www/equipment/List/index.js	(revision fd1ba13f833e7be095b30bb34c780cf45fb7ec71)
++++ src/www/equipment/List/index.js	(date 1598944471950)
+@@ -11,7 +11,7 @@
+ import {Bounce, toast} from "react-toastify";
+ import Route from "react-router-dom/es/Route";
+ import Redirect from "react-router-dom/es/Redirect";
+-import {repairerMenu} from "../../../Layout/AppNav/VerticalNavWrapper";
++import {equipmentMenu} from "../../../Layout/AppNav/VerticalNavWrapper"; //loading effect
+ 
+ // import MultiStep from ".//create";
+ 
+@@ -402,7 +402,7 @@
+                                             onClick={() => {
+                                                 this.props.history.push('/equipment/create/000');
+                                                 setTimeout(function () {
+-                                                    repairerMenu.changeActiveLinkTo('#/equipment/create/000');
++                                                    equipmentMenu.changeActiveLinkTo('#/equipment/create/000');
+ 
+                                                 }.bind(this),);
+                                                 // myMenu.changeActiveLinkLabel('Register');
+@@ -572,7 +572,11 @@
+                                                                             outline
+                                                                             color="info"
+                                                                             onClick={() => {
+-                                                                                history.push('/equipment/Create/' + row.original.id)
++                                                                                history.push('/equipment/Create/' + row.original.id);
++                                                                                setTimeout(function () {
++                                                                                    equipmentMenu.changeActiveLinkTo('#/equipment/create/000');
++
++                                                                                }.bind(this),);
+                                                                             }}
+                                                                         ><FontAwesomeIcon icon={faEye}/>
+                                                                         </Button>

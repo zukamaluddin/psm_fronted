@@ -1,0 +1,19 @@
+table {
+    padding-bottom: 10px;
+}
+
+table  thead tr th {
+    text-align: center;
+}
+
+table  tbody tr td {
+    text-align: center;
+}
+
+table  tfoot tr td {
+    text-align: center;
+}
+
+table  tfoot tr .countCss {
+    text-align: right;
+}

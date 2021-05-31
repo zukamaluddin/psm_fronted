@@ -1,0 +1,25 @@
+.off-overflow {
+  .rt-table {
+    overflow: unset !important;
+  }
+}
+
+#taskCKEditor {
+
+  .ck-editor__editable_inline {
+    min-height: 200px;
+  }
+
+}
+
+.custom-datetimepicker-task {
+  width: 400px;
+}
+
+#reportCKEditor {
+
+  .ck-editor__editable_inline {
+    min-height: 200px;
+  }
+
+}
