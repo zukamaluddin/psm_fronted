@@ -1,7 +1,7 @@
 export default {
     checkEmail: (data) => {
         return new Promise((resolve, reject) => {
-            fetch(`${global.ipServer}user/check_email/${data}/${global.global_id}`, {
+            fetch(`${global.ipServerB}user/check_email/${data}/${global.global_id}`, {
                 headers: {
                     'x-access-token': global.token
                 },
@@ -15,7 +15,7 @@ export default {
 
     listUser: (data) => {
         return new Promise((resolve, reject) => {
-            fetch(global.ipServer + "user/list/" + global.global_id, {
+            fetch(global.ipServerB + "user/list/" + global.global_id, {
                 method: 'POST', body: JSON.stringify(data),
                 headers: {
                     'Content-Type': 'application/json',
@@ -33,7 +33,7 @@ export default {
     deleteUser: (data) => {
         return new Promise((resolve, reject) => {
 
-            fetch(global.ipServer + "user/delete/" + global.global_id, {
+            fetch(global.ipServerB + "user/delete/" + global.global_id, {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json',
@@ -52,7 +52,7 @@ export default {
     viewUser: (rowid) => {
         return new Promise((resolve, reject) => {
 
-            fetch(global.ipServer + "user/view/" + rowid , {
+            fetch(global.ipServerB + "user/view/" + rowid , {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',

@@ -26,6 +26,7 @@ if (window.location.hostname !== "localhost") {
 
 } else {
     global.ipServer = 'http://localhost:8080/edata-be/';   /*Logic*/
+    global.ipServerB = 'http://localhost:8080/bernas/';   /*Logic*/
 }
 
 export const redirectLogout = (status, props) => {
