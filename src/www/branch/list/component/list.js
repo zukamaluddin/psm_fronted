@@ -275,20 +275,8 @@ export default class ListBranch extends React.Component {
                                     // width: 150
                                 }, {
                                     Header: 'Status',
-                                    accessor: 'status',width: 150,
-                                    Filter: ({filter, onChange}) =>
-                                        <select
-                                            onChange={event => onChange(event.target.value)}
-                                            style={{width: "100%"}}
-                                            value={filter ? filter.value : "All"}
-                                        >
-                                            <option value="">Semua</option>
-                                            {allState.map(option => (
-                                                <option key={option} value={option}>
-                                                    {option}
-                                                </option>
-                                            ))}
-                                        </select>
+                                    accessor: 'status',width: 100,
+                                    filterable: false
                                 },  {
                                     Header: 'Aksi',
                                     sortable: false,

@@ -311,19 +311,6 @@ export default class ListUser extends React.Component {
                                     sortable: false,
                                     filterable: false,
                                     width: 200,
-                                    // Filter: ({filter, onChange}) =>
-                                    //     <select
-                                    //         onChange={event => onChange(event.target.value)}
-                                    //         style={{width: "100%"}}
-                                    //         value={filter ? filter.value : "All"}
-                                    //     >
-                                    //         <option value="">Semua</option>
-                                    //         {this.state.branchData.map(option => (
-                                    //             <option key={option.id} value={option.id}>
-                                    //                 {option.code} - {option.kawasan}
-                                    //             </option>
-                                    //         ))}
-                                    //     </select>
                                 },
                                 {
                                     Header: 'Jawatan',
@@ -331,19 +318,6 @@ export default class ListUser extends React.Component {
                                     sortable: false,
                                     filterable: false,
                                     width: 150,
-                                    // Filter: ({filter, onChange}) =>
-                                    //     <select
-                                    //         onChange={event => onChange(event.target.value)}
-                                    //         style={{width: "100%"}}
-                                    //         value={filter ? filter.value : "All"}
-                                    //     >
-                                    //         <option value="">Semua</option>
-                                    //         <option value='Manager Negeri'>Manager Negeri</option>
-                                    //         <option value='Manager Cawangan'>Manager Cawangan</option>
-                                    //         <option value="HQ">HQ</option>
-                                    //         <option value="Staf">Staf</option>
-                                    //         <option value="KPDNHEP">KPDNHEP</option>
-                                    //     </select>
                                 },
                                 {
                                     Header: 'Status',
@@ -362,17 +336,7 @@ export default class ListUser extends React.Component {
                                             </AnimationDiv>)
                                         }
                                     },
-                                    // Filter: ({filter, onChange}) =>
-                                    //     <select
-                                    //         onChange={event => onChange(event.target.value)}
-                                    //         style={{width: "100%"}}
-                                    //         value={filter ? filter.value : "All"}
-                                    //     >
-                                    //         <option value="">Semua</option>
-                                    //         <option value="2">Baru</option>
-                                    //         <option value="1">Aktif</option>
-                                    //         <option value="0">Tidak Aktif</option>
-                                    //     </select>
+
                                 },
                                 {
                                     Header: 'Aksi',

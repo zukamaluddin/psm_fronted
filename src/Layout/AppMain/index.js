@@ -112,7 +112,7 @@ const AppMain = () => {
                 </div>
             }>
                 <Switch>
-                    <Route path="/401" component={Page401}/>
+                    {/*<Route path="/401" component={Page401}/>*/}
                     <Route exact path="/forgot-password" component={Auth}/>
                     <Route exact path="/reset-password/:token" component={Auth}/>
                     <Route exact path="/register" component={Auth}/>
@@ -131,35 +131,35 @@ const AppMain = () => {
                         localStorage.getItem('position') === 'HQ' ?
                             <Redirect to={'/user/list'}/> :''
                     }
-                    {
-                        localStorage.getItem('position') === 'KPDNHEP' ?
-                            <Redirect to={'/report/serapan'}/> :''
-                    }
-                    {
-                        localStorage.getItem('position') === 'Kerani Cawangan' ?
-                            <Redirect to={'/report/daily'}/> :''
-                    }
-                    {
-                        localStorage.getItem('position') === 'Staf' ?
-                            <Redirect to={'/equipment/list'}/> :''
-                    }
-                    {
-                        localStorage.getItem('position') === 'Manager Cawangan' ?
-                            <Redirect to={'/equipment/list'}/> :''
-                    }
-                    {
-                        localStorage.getItem('position') === 'Manager Negeri' ?
-                            <Redirect to={'/equipment/list'}/> :''
-                    }
+                    {/*{*/}
+                    {/*    localStorage.getItem('position') === 'KPDNHEP' ?*/}
+                    {/*        <Redirect to={'/report/serapan'}/> :''*/}
+                    {/*}*/}
+                    {/*{*/}
+                    {/*    localStorage.getItem('position') === 'Kerani Cawangan' ?*/}
+                    {/*        <Redirect to={'/report/daily'}/> :''*/}
+                    {/*}*/}
+                    {/*{*/}
+                    {/*    localStorage.getItem('position') === 'Staf' ?*/}
+                    {/*        <Redirect to={'/equipment/list'}/> :''*/}
+                    {/*}*/}
+                    {/*{*/}
+                    {/*    localStorage.getItem('position') === 'Manager Cawangan' ?*/}
+                    {/*        <Redirect to={'/equipment/list'}/> :''*/}
+                    {/*}*/}
+                    {/*{*/}
+                    {/*    localStorage.getItem('position') === 'Manager Negeri' ?*/}
+                    {/*        <Redirect to={'/equipment/list'}/> :''*/}
+                    {/*}*/}
 
                     {
                         localStorage.getItem('user') ?
-                            '' :
+                            <Route path="/user" component={userManagement}/>:
                             <Route exact path="/login" component={Auth}/>
                     }
 
 
-                    <Route component={Page404}/>
+                    {/*<Route component={Page404}/>*/}
 
                 </Switch>
 

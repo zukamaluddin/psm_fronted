@@ -25,7 +25,7 @@ if (window.location.hostname !== "localhost") {
     global.ipServer = window.location.protocol + "//" + window.location.hostname + "/edata-be/";
 
 } else {
-    global.ipServer = 'http://localhost:8080/edata-be/';   /*Logic*/
+    global.ipServer = 'http://localhost:8080/bernas/';   /*Logic*/
     global.ipServerB = 'http://localhost:8080/bernas/';   /*Logic*/
 }
 

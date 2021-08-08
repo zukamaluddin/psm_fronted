@@ -41,11 +41,11 @@ class CreateComp extends React.Component {
     }
     validateBranchApi = async (code) => {
 
-        if (code) {
-            this.setState({branchCodeApi:await API.checkBranch(code)});
-        }else{
-            this.state.validForm.branchCodeApi = false
-        }
+        // if (code) {
+        //     this.setState({branchCodeApi:await API.checkBranch(code)});
+        // }else{
+        //     this.state.validForm.branchCodeApi = false
+        // }
     };
     handleKeyDown = evt => {
         if (evt.which === 13) {
@@ -64,9 +64,15 @@ class CreateComp extends React.Component {
         // (this.state.fax === '' || this.state.fax === undefined) ? copy.fax = true : copy.fax = false;
 
         this.setState({validForm: copy}, function () {
-            // if (Object.keys(this.state.validForm).every(k => !this.state.validForm[k])) {
+                let cawangan = "";
+                if(global.role == "HQ"){
+                    cawangan = this.state.selectedState
+                }else{
+                    cawangan = global.token
+                }
+
                 let data = {
-                    cawangan: this.state.selectedState,
+                    cawangan: cawangan,
                     ibdNo: this.state.ibdNo,
                     serialNo: this.state.serialNo,
                     rfid: this.state.rfid,
@@ -122,6 +128,7 @@ class CreateComp extends React.Component {
 
 
     render() {
+        // alert(global.role)
         return (
             <Card className="main-card mb-3">
 
@@ -163,25 +170,34 @@ class CreateComp extends React.Component {
                                 {/*</Col>*/}
                                 <Col md={6}>
                                     <FormGroup>
-                                        <Label for="negeri">
-                                            Cawangan</Label>
-                                        <Input name="branch" type="select" id='position'
-                                               value={this.state.selectedState}
-                                               defaultValue={''}
-                                               onChange={(dataEl) => {
-                                                   this.setState({selectedState: dataEl.target.value});
-                                               }}
-                                               invalid={this.state.validForm.selectedState}>
+                                        <Label for="negeri">Cawangan</Label>
+                                        {global.role == "HQ" ?
+                                            <div>
+                                                <Input name="branch" type="select" id='position'
+                                                value={this.state.selectedState}
+                                                defaultValue={''}
+                                                onChange={(dataEl) => {
+                                                this.setState({selectedState: dataEl.target.value});
+                                            }}
+                                                invalid={this.state.validForm.selectedState}>
 
-                                            <option key={''} value={''} disabled>Sila pilih</option>
+                                                <option key={''} value={''} disabled>Sila pilih</option>
                                             {allState.map(option => (
                                                 <option key={option} value={option}>
-                                                    {option}
+                                            {option}
                                                 </option>
-                                            ))}
+                                                ))}
 
-                                        </Input>
-                                        <FormFeedback><i>Wajib diisi</i></FormFeedback>
+                                                </Input>
+                                                <FormFeedback><i>Wajib diisi</i></FormFeedback>
+                                            </div>:
+                                            <div>
+                                                <Input type="text" disabled
+                                                        value={global.token}
+                                                       />
+                                            </div>
+                                            }
+
                                     </FormGroup>
                                 </Col>
                                 <Col md={6}>

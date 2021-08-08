@@ -94,7 +94,7 @@ export default class Login extends React.Component {
         if (data['email'].length !== 0 && data['password'].length !== 0) {
             this.toggle('expZoomIn');
 
-            fetch(global.ipServer + "login", {
+            fetch(global.ipServer + "user/login", {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -107,11 +107,12 @@ export default class Login extends React.Component {
                     this.toggle('expZoomIn');
                     if (data.status === 'OK') {
                         global.global_id = data.userid;
-                        global.token = data.token
-                        global.role = data.role;
+                        global.token = data.cawangan
+                        global.role = data.jawatan;
                         global.name = data.name;
                         global.position = data.position;
                         global.branch_id = data.branch_id;
+
                         global.picture = global.ipServer + 'file/' + global.global_id + '/' + data.picture;
 
                         fakeAuth.authenticate();
