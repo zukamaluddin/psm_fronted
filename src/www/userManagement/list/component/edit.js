@@ -368,12 +368,12 @@ export default class EditModal extends React.Component {
                     </div>
                 </ModalBody>
                 <ModalFooter>
-
+                    {global.position !== 'HQ' &&
                     <Button color="success" className='mb-2 mr-2 btn-icon btn-shadow btn-outline-2x' outline
                             style={{width: '140px'}}
                             onClick={this.submitEditUser.bind(this, this.state.modalData.id)}><i
                         className="lnr-checkmark-circle btn-icon-wrapper"> </i>Kemaskini</Button>
-
+                    }
                     <Button color="danger" className='mb-2 mr-2 btn-icon btn-shadow btn-outline-2x'
                             outline onClick={this.hideModalEdit} style={{width: '140px'}}> <i
                         className="lnr-cross-circle btn-icon-wrapper"> </i> Tutup</Button>

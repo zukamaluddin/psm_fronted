@@ -103,23 +103,23 @@ export default class ListBranch extends React.Component {
     };
 
     fetchData(state, instance) {
-        let filterBranchCode = '';
-        let filterRegional = '';
-        let filterState = '';
-        let filterAddress = '';
+        let filterRFID = '';
+        let filteribdNo = '';
+        let filterCawangan = '';
+        let filterserial = '';
         for (var x in state.filtered) {
-
-            if (state.filtered[x].id === 'code') {
-                filterBranchCode = state.filtered[x].value
+            console.log(state.filtered[x].id)
+            if (state.filtered[x].id === 'rfidNo') {
+                filterRFID = state.filtered[x].value
             }
-            if (state.filtered[x].id === 'regional') {
-                filterRegional = state.filtered[x].value
+            if (state.filtered[x].id === 'ibdNo') {
+                filteribdNo = state.filtered[x].value
             }
-            if (state.filtered[x].id === 'state') {
-                filterState = state.filtered[x].value
+            if (state.filtered[x].id === 'cawangan') {
+                filterCawangan = state.filtered[x].value
             }
-            if (state.filtered[x].id === 'address') {
-                filterAddress = state.filtered[x].value
+            if (state.filtered[x].id === 'serialNo') {
+                filterserial = state.filtered[x].value
             }
 
         }
@@ -132,10 +132,10 @@ export default class ListBranch extends React.Component {
                         sorted: this.state.set.sorted,
                         pageSize: state.pageSize,
                         page: this.state.currentPage,
-                        branchCode: filterBranchCode,
-                        regional: filterRegional,
-                        address: filterAddress,
-                        state: filterState,
+                        rfidNo: filterRFID,
+                        ibdNo: filteribdNo,
+                        cawangan: filterCawangan,
+                        serialno: filterserial,
                     }
                 }, this.loadData);
             }.bind(this),
@@ -152,60 +152,95 @@ export default class ListBranch extends React.Component {
 
             <Card className="main-card mb-3">
                 <CardBody>
+                    {global.position === 'HQ' ?
+                        <Button style={{width: '140px'}}
+                                onClick={() => {
+                                    this.setState({
+                                        filtered: [],
+                                        sorted: [{id: 'code', desc: true}],
+                                        currentPage: 0,
+                                        loading: true
+                                    });
 
-                    <Button style={{width: '140px'}}
-                            onClick={() => {
-                                this.props.history.push('/branch/register');
-                                setTimeout(function () {
-                                    branchMenu.changeActiveLinkTo('#/branch/register');
-                                }.bind(this),);
-                            }}
+                                    let dataSelected = this.state.data;
 
-                            className="mb-2 mr-2 btn-icon btn-shadow btn-outline-2x" outline
-                            color="success">
-                        <i className="lnr-user btn-icon-wrapper"> </i>
-                        Tambah
-                    </Button>
-                    <Button style={{width: '140px'}}
-                            onClick={() => {
-                                this.deleteModal.current.toggleModalDeleteAll(this.selectedDataAssign);
-                            }}
-                            className="mb-2 mr-2 btn-icon btn-shadow btn-outline-2x" outline
-                            color="danger">
-                        <i className="lnr-cross-circle btn-icon-wrapper"> </i>
-                        Hapus
-                    </Button>
-                    <Button style={{width: '140px'}}
-                            onClick={() => {
-                                this.setState({
-                                    filtered: [],
-                                    sorted: [{id: 'code', desc: true}],
-                                    currentPage: 0,
-                                    loading:true
-                                });
+                                    let isSelected = [];
+                                    Object.keys(dataSelected).map(function (key, value) {
+                                        isSelected.push(dataSelected[key]['id'])
+                                    });
+                                    for (let i = 0; i < isSelected.length; i++) {
+                                        this.state.selected[isSelected[i]] = false;
+                                    }
+                                    this.state.selectAll = 0;
+                                    this.fetchData({
+                                        filtered: [],
+                                        page: 0,
+                                        pageSize: 10,
+                                        sorted: [{id: 'code', desc: true}]
+                                    });
+                                }}
+                                className="mb-2 mr-2 btn-icon btn-shadow btn-outline-2x" outline
+                                color="info">
+                            <i className="lnr-sync btn-icon-wrapper"> </i>
+                            Refresh
+                        </Button>
+                        :
+                        <div>
+                            <Button style={{width: '140px'}}
+                                    onClick={() => {
+                                        this.props.history.push('/branch/register');
+                                        setTimeout(function () {
+                                            branchMenu.changeActiveLinkTo('#/branch/register');
+                                        }.bind(this),);
+                                    }}
 
-                                let dataSelected = this.state.data;
+                                    className="mb-2 mr-2 btn-icon btn-shadow btn-outline-2x" outline
+                                    color="success">
+                                <i className="lnr-user btn-icon-wrapper"> </i>
+                                Tambah
+                            </Button>
+                            <Button style={{width: '140px'}}
+                                    onClick={() => {
+                                        this.deleteModal.current.toggleModalDeleteAll(this.selectedDataAssign);
+                                    }}
+                                    className="mb-2 mr-2 btn-icon btn-shadow btn-outline-2x" outline
+                                    color="danger">
+                                <i className="lnr-cross-circle btn-icon-wrapper"> </i>
+                                Hapus
+                            </Button>
+                            <Button style={{width: '140px'}}
+                                    onClick={() => {
+                                        this.setState({
+                                            filtered: [],
+                                            sorted: [{id: 'code', desc: true}],
+                                            currentPage: 0,
+                                            loading: true
+                                        });
 
-                                let isSelected = [];
-                                Object.keys(dataSelected).map(function (key, value) {
-                                    isSelected.push(dataSelected[key]['id'])
-                                });
-                                for (let i = 0; i < isSelected.length; i++) {
-                                    this.state.selected[isSelected[i]] = false;
-                                }
-                                this.state.selectAll = 0;
-                                this.fetchData({
-                                    filtered: [],
-                                    page: 0,
-                                    pageSize: 10,
-                                    sorted: [{id: 'code', desc: true}]
-                                });
-                            }}
-                            className="mb-2 mr-2 btn-icon btn-shadow btn-outline-2x" outline
-                            color="info">
-                        <i className="lnr-sync btn-icon-wrapper"> </i>
-                        Refresh
-                    </Button>
+                                        let dataSelected = this.state.data;
+
+                                        let isSelected = [];
+                                        Object.keys(dataSelected).map(function (key, value) {
+                                            isSelected.push(dataSelected[key]['id'])
+                                        });
+                                        for (let i = 0; i < isSelected.length; i++) {
+                                            this.state.selected[isSelected[i]] = false;
+                                        }
+                                        this.state.selectAll = 0;
+                                        this.fetchData({
+                                            filtered: [],
+                                            page: 0,
+                                            pageSize: 10,
+                                            sorted: [{id: 'code', desc: true}]
+                                        });
+                                    }}
+                                    className="mb-2 mr-2 btn-icon btn-shadow btn-outline-2x" outline
+                                    color="info">
+                                <i className="lnr-sync btn-icon-wrapper"> </i>
+                                Refresh
+                            </Button>
+                        </div>
+                    }
                     <ReactTable
                         onFetchData={(state, instance) => {
                             this.setState({loading: true});
@@ -283,6 +318,7 @@ export default class ListBranch extends React.Component {
                                     filterable: false,
                                     width: 100,
                                     Cell: row => (
+                                        global.position === 'HQ' ?
                                         <div
                                             className="widget-content-right widget-content-actions"
                                             style={{textAlign: 'center', width: '100%'}}>
@@ -295,23 +331,39 @@ export default class ListBranch extends React.Component {
                                                     color="success">
                                                 <FontAwesomeIcon icon={faEye}/>
                                             </Button>
-                                            <Button
-                                                className="border-0 btn-transition"
-                                                onClick={() => {
-                                                    this.deleteModal.current.showModalDelete(row);
-                                                }}
-                                                outline
-                                                color="danger">
-                                                {
-                                                    <FontAwesomeIcon
-                                                        disabled={global.global_id === row.original.created_id}
-                                                        icon={faTrashAlt}/>
 
-                                                }
-                                            </Button>
                                             <EditModal ref={this.editModal} getdata={this.fetchData}/>
-                                            <DeleteModal ref={this.deleteModal} getdata={this.fetchData}/>
-                                        </div>
+                                            </div>
+                                            :
+                                            <div
+                                                className="widget-content-right widget-content-actions"
+                                                style={{textAlign: 'center', width: '100%'}}>
+
+                                                <Button className="border-0 btn-transition"
+                                                        onClick={() => {
+                                                            this.editModal.current.showModalEdit(row);
+                                                        }}
+                                                        outline
+                                                        color="success">
+                                                    <FontAwesomeIcon icon={faEye}/>
+                                                </Button>
+                                                <Button
+                                                    className="border-0 btn-transition"
+                                                    onClick={() => {
+                                                        this.deleteModal.current.showModalDelete(row);
+                                                    }}
+                                                    outline
+                                                    color="danger">
+                                                    {
+                                                        <FontAwesomeIcon
+                                                            disabled={global.global_id === row.original.created_id}
+                                                            icon={faTrashAlt}/>
+
+                                                    }
+                                                </Button>
+                                                <EditModal ref={this.editModal} getdata={this.fetchData}/>
+                                                <DeleteModal ref={this.deleteModal} getdata={this.fetchData}/>
+                                            </div>
                                     )
                                 }
                             ]

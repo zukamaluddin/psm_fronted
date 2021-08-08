@@ -170,23 +170,23 @@ export default class ListForm extends React.Component {
 
     fetchData = (state, instance) => {
 
-        let name = '';
-        let noRocRob = '';
-        let agency = '';
-        let address = '';
+        let batchNo = '';
+        let year = '';
+        let month = '';
+        let cawangan = '';
         for (var x in state.filtered) {
 
-            if (state.filtered[x].id === 'name') {
-                name = state.filtered[x].value
+            if (state.filtered[x].id === 'batchNo') {
+                batchNo = state.filtered[x].value
             }
-            if (state.filtered[x].id === 'noRocRob') {
-                noRocRob = state.filtered[x].value
+            if (state.filtered[x].id === 'year') {
+                year = state.filtered[x].value
             }
-            if (state.filtered[x].id === 'agency') {
-                agency = state.filtered[x].value
+            if (state.filtered[x].id === 'month') {
+                month = state.filtered[x].value
             }
-            if (state.filtered[x].id === 'address') {
-                address = state.filtered[x].value
+            if (state.filtered[x].id === 'cawangan') {
+                cawangan = state.filtered[x].value
             }
 
         }
@@ -199,10 +199,10 @@ export default class ListForm extends React.Component {
                         pageSize: state.pageSize,
                         page: state.page,
                         pages: state.page,
-                        name: name,
-                        noRocRob: noRocRob,
-                        agency: agency,
-                        address: address,
+                        batchNo: batchNo,
+                        year: year,
+                        month: month,
+                        cawangan: cawangan,
                     }
                 }, this.loadData);
             }.bind(this),
@@ -499,19 +499,19 @@ export default class ListForm extends React.Component {
                                                     Header: 'Batch No.',
                                                     accessor: "batchNo",
                                                     sortable: false,
-                                                    filterable: false,
+                                                    // filterable: false,
                                                     width: 250
                                                 },
                                                 {
                                                     Header: 'Tahun',
                                                     accessor: 'year',
-                                                    filterable: false,
+                                                    // filterable: false,
                                                     width: 100
                                                 },
                                                 {
                                                     Header: 'Bulan',
                                                     accessor: 'month',
-                                                    filterable: false,
+                                                    // filterable: false,
                                                     width: 100
                                                 },
                                                 {

@@ -65,11 +65,19 @@ export const DashboardNav = [
     }
 ]
 
-export const UserManagement = [
-    {
-        icon: 'pe-7s-id',
-        label: 'Pengurusan Pengguna',
-        content: [
+
+
+let userContent = function () {
+    if (localStorage.getItem('position') === "HQ"){
+        return [
+            {
+                label: 'Senarai',
+                to: '#/user/list',
+            },
+
+        ]
+    }else{
+        return [
             {
                 label: 'Pendaftaran',
                 to: '#/user/register',
@@ -81,41 +89,32 @@ export const UserManagement = [
 
         ]
     }
-];
+
+}
 
 let branchContent = function () {
-    return [
-        {
-            label: 'Pendaftaran',
-            to: '#/branch/register',
-        },
-        {
-            label: 'Senarai',
-            to: '#/branch/list',
-        },
 
-    ]
-    // if (localStorage.getItem('position') === "HQ"){
-    //     return [
-    //         {
-    //             label: 'Pendaftaran',
-    //             to: '#/branch/register',
-    //         },
-    //         {
-    //             label: 'Senarai',
-    //             to: '#/branch/list',
-    //         },
-    //
-    //     ]
-    // }else{
-    //     return [
-    //         {
-    //             label: 'Senarai',
-    //             to: '#/branch/list',
-    //         },
-    //
-    //     ]
-    // }
+    if (localStorage.getItem('position') === "HQ"){
+        return [
+            {
+                label: 'Senarai',
+                to: '#/branch/list',
+            },
+
+        ]
+    }else{
+        return [
+            {
+                label: 'Pendaftaran',
+                to: '#/branch/register',
+            },
+            {
+                label: 'Senarai',
+                to: '#/branch/list',
+            },
+
+        ]
+    }
 
 };
 
@@ -127,29 +126,15 @@ export const Branch = [
     }
 ];
 
+export const UserManagement = [
+    {
+        icon: 'pe-7s-id',
+        label: 'Pengurusan Pengguna',
+        content: userContent()
+    }
+];
 
-// export const EquipmentNav = EquipmentNavAccess()
 
-// export const EquipmentNav = [
-//     {
-//         icon: 'pe-7s-news-paper',
-//         label: 'Alatan',
-//         content: [
-//             {
-//                 label: 'Daftar Alatan',
-//                 to: '#/equipment/create/000',
-//             },
-//             {
-//                 label: 'Senarai Alatan',
-//                 to: '#/equipment/list',
-//             },
-//             {
-//                 label: 'Carian Stiker',
-//                 to: '#/equipment/carian',
-//             },
-//
-//         ]
-//     }];
 
 let reportContent = function () {
     if (localStorage.getItem('position') === "HQ") {

@@ -180,66 +180,102 @@ export default class ListUser extends React.Component {
 
     render() {
         const {data} = this.state;
-
+        console.log(global.position)
 
         return (
 
             <Card className="main-card mb-3">
                 <CardBody>
+                    {global.position === 'HQ' ?
+                        <Button style={{width: '140px'}}
+                                onClick={() => {
+                                    this.setState({
+                                        filtered: [],
+                                        sorted: [{id: "date_created", desc: true}],
+                                        page: 0,
+                                        loading: true
+                                    });
 
-                    <Button style={{width: '140px'}}
-                            onClick={() => {
-                                this.props.history.push('/user/register');
-                                setTimeout(function () {
-                                    umMenu.changeActiveLinkTo('#/user/register');
-                                }.bind(this),);
-                            }}
+                                    let dataSelected = this.state.data;
 
-                            className="mb-2 mr-2 btn-icon btn-shadow btn-outline-2x" outline
-                            color="success">
-                        <i className="lnr-user btn-icon-wrapper"> </i>
-                        Tambah
-                    </Button>
-                    <Button style={{width: '140px'}}
-                            onClick={() => {
-                                this.deleteModal.current.toggleModalDeleteAll(this.selectedDataAssign);
-                            }}
-                            className="mb-2 mr-2 btn-icon btn-shadow btn-outline-2x" outline
-                            color="danger">
-                        <i className="lnr-cross-circle btn-icon-wrapper"> </i>
-                        Hapus
-                    </Button>
-                    <Button style={{width: '140px'}}
-                            onClick={() => {
-                                this.setState({
-                                    filtered: [],
-                                    sorted:  [{id: "date_created", desc: true}],
-                                    page: 0,
-                                    loading: true
-                                });
+                                    let isSelected = [];
+                                    Object.keys(dataSelected).map(function (key, value) {
+                                        isSelected.push(dataSelected[key]['id'])
+                                    });
+                                    for (let i = 0; i < isSelected.length; i++) {
+                                        this.state.selected[isSelected[i]] = false;
+                                    }
+                                    this.state.selectAll = 0;
+                                    this.fetchData({
+                                        filtered: [],
+                                        page: 0,
+                                        pageSize: 10,
+                                        sorted: [{id: "date_created", desc: true}]
+                                    });
+                                }}
+                                className="mb-2 mr-2 btn-icon btn-shadow btn-outline-2x" outline
+                                color="info">
+                            <i className="lnr-sync btn-icon-wrapper"> </i>
+                            Refresh
+                        </Button>
 
-                                let dataSelected = this.state.data;
+                        :
+                        <div>
+                            <Button style={{width: '140px'}}
+                                    onClick={() => {
+                                        this.props.history.push('/user/register');
+                                        setTimeout(function () {
+                                            umMenu.changeActiveLinkTo('#/user/register');
+                                        }.bind(this),);
+                                    }}
+                                    disabled={global.position != "HQ" ? true : false}
+                                    className="mb-2 mr-2 btn-icon btn-shadow btn-outline-2x" outline
+                                    color="success">
+                                <i className="lnr-user btn-icon-wrapper"> </i>
+                                Tambah
+                            </Button>
+                            <Button style={{width: '140px'}}
+                                    onClick={() => {
+                                        this.deleteModal.current.toggleModalDeleteAll(this.selectedDataAssign);
+                                    }}
+                                    className="mb-2 mr-2 btn-icon btn-shadow btn-outline-2x" outline
+                                    color="danger">
+                                <i className="lnr-cross-circle btn-icon-wrapper"> </i>
+                                Hapus
+                            </Button>
+                            <Button style={{width: '140px'}}
+                                    onClick={() => {
+                                        this.setState({
+                                            filtered: [],
+                                            sorted: [{id: "date_created", desc: true}],
+                                            page: 0,
+                                            loading: true
+                                        });
 
-                                let isSelected = [];
-                                Object.keys(dataSelected).map(function (key, value) {
-                                    isSelected.push(dataSelected[key]['id'])
-                                });
-                                for (let i = 0; i < isSelected.length; i++) {
-                                    this.state.selected[isSelected[i]] = false;
-                                }
-                                this.state.selectAll = 0;
-                                this.fetchData({
-                                    filtered: [],
-                                    page: 0,
-                                    pageSize: 10,
-                                    sorted: [{id: "date_created", desc: true}]
-                                });
-                            }}
-                            className="mb-2 mr-2 btn-icon btn-shadow btn-outline-2x" outline
-                            color="info">
-                        <i className="lnr-sync btn-icon-wrapper"> </i>
-                        Refresh
-                    </Button>
+                                        let dataSelected = this.state.data;
+
+                                        let isSelected = [];
+                                        Object.keys(dataSelected).map(function (key, value) {
+                                            isSelected.push(dataSelected[key]['id'])
+                                        });
+                                        for (let i = 0; i < isSelected.length; i++) {
+                                            this.state.selected[isSelected[i]] = false;
+                                        }
+                                        this.state.selectAll = 0;
+                                        this.fetchData({
+                                            filtered: [],
+                                            page: 0,
+                                            pageSize: 10,
+                                            sorted: [{id: "date_created", desc: true}]
+                                        });
+                                    }}
+                                    className="mb-2 mr-2 btn-icon btn-shadow btn-outline-2x" outline
+                                    color="info">
+                                <i className="lnr-sync btn-icon-wrapper"> </i>
+                                Refresh
+                            </Button>
+                        </div>
+                    }
                     <ReactTable
                         data={data}
                         // filterable
@@ -344,33 +380,53 @@ export default class ListUser extends React.Component {
                                     filterable: false,
                                     width: 150,
                                     Cell: row => (
-                                        <div
-                                            className="widget-content-right widget-content-actions"
-                                            style={{textAlign: 'center', width: '100%'}}>
+                                        global.position === 'HQ' ?
+                                            <div
+                                                className="widget-content-right widget-content-actions"
+                                                style={{textAlign: 'center', width: '100%'}}>
 
-                                            <Button className="border-0 btn-transition"
+                                                <Button className="border-0 btn-transition"
+                                                        onClick={() => {
+                                                            this.editModal.current.showModalEdit(row);
+                                                        }}
+                                                        outline
+                                                        color="success">
+                                                    <FontAwesomeIcon icon={faEye}/>
+                                                </Button>
+
+
+                                                <EditModal ref={this.editModal} getdata={this.fetchData}/>
+                                            </div>
+
+                                            :
+                                            <div
+                                                className="widget-content-right widget-content-actions"
+                                                style={{textAlign: 'center', width: '100%'}}>
+
+                                                <Button className="border-0 btn-transition"
+                                                        onClick={() => {
+                                                            this.editModal.current.showModalEdit(row);
+                                                        }}
+                                                        outline
+                                                        color="success">
+                                                    <FontAwesomeIcon icon={faEye}/>
+                                                </Button>
+
+                                                <Button
+                                                    className="border-0 btn-transition"
                                                     onClick={() => {
-                                                        this.editModal.current.showModalEdit(row);
+                                                        this.deleteModal.current.showModalDelete(row);
                                                     }}
                                                     outline
-                                                    color="success">
-                                                <FontAwesomeIcon icon={faEye}/>
-                                            </Button>
-
-                                            <Button
-                                                className="border-0 btn-transition"
-                                                onClick={() => {
-                                                    this.deleteModal.current.showModalDelete(row);
-                                                }}
-                                                outline
-                                                color="danger">
+                                                    color="danger">
 
                                                     <FontAwesomeIcon icon={faTrashAlt}/>
 
-                                            </Button>
-                                            <EditModal ref={this.editModal} getdata={this.fetchData}/>
-                                            <DeleteModal ref={this.deleteModal} getdata={this.fetchData}/>
-                                        </div>
+                                                </Button>
+                                                <EditModal ref={this.editModal} getdata={this.fetchData}/>
+                                                <DeleteModal ref={this.deleteModal} getdata={this.fetchData}/>
+                                            </div>
+
                                     )
                                 }
                             ]
