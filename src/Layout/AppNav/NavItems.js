@@ -37,7 +37,7 @@ export const MainNav = [
 export const userRepairerNav = [
     {
         icon: 'pe-7s-tools',
-        label: 'Laporan IBD',
+        label: 'Surat Lantikan',
         // add: true,
         // delete: true,
         // update: true,
@@ -121,7 +121,7 @@ let branchContent = function () {
 export const Branch = [
     {
         icon: 'pe-7s-culture',
-        label: 'Mesin',
+        label: 'Tugasan',
         content: branchContent()
     }
 ];

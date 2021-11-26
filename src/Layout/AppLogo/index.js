@@ -46,9 +46,7 @@ class HeaderLogo extends React.Component {
         return (
             <Fragment>
                 <div className="app-header__logo">
-
-                    <img src={dmsbIcon} alt={'logo'} style={{height:'40px'}}/>
-                    <b style={{whiteSpace: 'nowrap', marginRight: '10px', marginLeft: '10px', marginTop: '5px',}}><h5>BERNAS</h5></b>
+                    <img src={dmsbIcon} alt={'logo'} style={{height:'45px'}}/>
                     <div className="header__pane ml-auto">
                         <div onClick={this.toggleEnableClosedSidebar}>
                             <Hamburger
