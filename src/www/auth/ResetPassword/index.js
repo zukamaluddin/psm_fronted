@@ -3,7 +3,7 @@ import {Redirect} from 'react-router-dom';
 import LaddaButton, {ZOOM_IN} from 'react-ladda';
 
 import {Col, Row, Button, Form, FormGroup, Label, Input, Alert, FormFeedback} from 'reactstrap';
-import dmsbIcon from "../../../assets/images/dmsb-no-bg.png";
+import dmsbIcon from "../../../assets/images/logo.png";
 
 export default class ResetPassword extends Component {
 

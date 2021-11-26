@@ -4,7 +4,7 @@ import {Col, Row, Button, Form, FormGroup, Label, Input, Alert, FormFeedback} fr
 import {Redirect} from "react-router-dom";
 
 import {authRegex} from "../Login";
-import dmsbIcon from "../../../assets/images/dmsb-no-bg.png";
+import dmsbIcon from "../../../assets/images/logo.png";
 
 export default class ForgotPassword extends Component {
     constructor(props) {
@@ -101,7 +101,7 @@ export default class ForgotPassword extends Component {
                                     textShadow: '0px 0px 10px white'
                                 }}>
                                     {/*<h1 style={{ fontWeight: 'bold'}}>Sistem e-Data</h1>*/}
-                                    <img src={dmsbIcon} alt={'icon'} style={{width:'200px'}}/>
+                                    <img src={dmsbIcon} alt={'icon'} style={{width:'500px'}}/>
                                 </div>
 
                                 <div className="modal-dialog w-100">

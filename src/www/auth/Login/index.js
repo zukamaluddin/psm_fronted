@@ -151,7 +151,7 @@ export default class Login extends React.Component {
                                 textShadow: '0px 0px 10px white'
                             }}>
                                 {/*<h1 style={{fontWeight: 'bold'}}>Sistem e-Data</h1>*/}
-                                <img src={dmsbIcon} alt={'icon'} style={{width:'200px'}}/>
+                                <img src={dmsbIcon} alt={'icon'} style={{width:'500px'}}/>
                             </div>
 
                             <div className="modal-dialog w-100 mx-auto">
@@ -160,7 +160,7 @@ export default class Login extends React.Component {
                                         <div className="h5 modal-title text-center">
                                             <h4 className="mt-2">
                                                 <div>Selamat Datang</div>
-                                                <span>Log Masuk ke Sistem BERNAS</span>
+                                                <span>Log Masuk ke Sistem Sekolah Komputeran</span>
                                             </h4>
                                         </div>
                                         <Form>
@@ -179,7 +179,7 @@ export default class Login extends React.Component {
                                                                onChange={this.handleChange.bind(this)}
                                                                onKeyDown={this.handleKeyDown}
                                                                invalid={this.state.emailValidate}
-                                                               placeholder="emel"/>
+                                                               placeholder="Emel"/>
                                                         <FormFeedback>
                                                             <i>Wajib isi dengan format emel yang betul</i>
                                                         </FormFeedback>
@@ -191,9 +191,9 @@ export default class Login extends React.Component {
                                                                onChange={this.handleChange.bind(this)}
                                                                onKeyDown={this.handleKeyDown}
                                                                invalid={this.state.passValidate}
-                                                               placeholder="kata laluan"/>
+                                                               placeholder="Kata Laluan"/>
                                                         <FormFeedback>
-                                                            <i>Wajib isi</i>
+                                                            <i>Wajib isi kata laluan</i>
                                                         </FormFeedback>
                                                     </FormGroup>
                                                 </Col>
