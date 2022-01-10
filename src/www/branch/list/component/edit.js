@@ -11,10 +11,12 @@ import React from "react";
 import API from "../../../../utils/apiBranch";
 import {DropdownList} from "react-widgets";
 import {Bounce, toast} from "react-toastify";
+import moment from "moment";
+import DatePicker from "react-datepicker/es";
 
 export const allState = ['Pekan, Pahang', 'Kulim, Kedah', 'Padang Besar, Perlis'];
 
-export const allStatus = ['Aktif', 'Rosak', 'Baiki'];
+export const allStatus = ['Baru', 'Dalam Progres', 'Selesai'];
 
 export default class EditModal extends React.Component {
     constructor(props) {
@@ -26,13 +28,10 @@ export default class EditModal extends React.Component {
         };
         this.showModalEdit = this.showModalEdit.bind(this);
         this.hideModalEdit = this.hideModalEdit.bind(this);
-
     }
-
 
     showModalEdit = async (data) => {
         let result = await API.viewBranch(data.original.id);
-
         this.setState({modalData: result.data, activeModal: true})
     };
 
@@ -42,23 +41,21 @@ export default class EditModal extends React.Component {
 
 
     editBranch(id) {
-
         let data = {
             id: id,
-            cawangan: this.state.modalData.cawangan,
-            ibdNo: this.state.modalData.ibdNo,
-            rfidNo:this.state.modalData.rfidNo,
-            serialNo: this.state.modalData.serialNo,
+            title: this.state.modalData.title,
             status: this.state.modalData.status,
-
+            dateStart: moment(this.state.modalData.dateStart).format('D/M/YYYY'),
+            dateEnd: moment(this.state.modalData.dateEnd).format('D/M/YYYY'),
+            description: this.state.modalData.description,
+            report: this.state.modalData.report,
         };
 
         const formData = new FormData();
         formData.append('data', JSON.stringify(data));
 
         return new Promise((resolve, reject) => {
-
-            fetch(global.ipServer + 'mesin/update', {
+            fetch(global.ipServer + 'tugasan/update', {
                 method: 'PUT',
                 body: formData,
                 headers: {
@@ -103,83 +100,16 @@ export default class EditModal extends React.Component {
                     });
                 });
         });
-
     };
 
     render() {
-
         return (
             <Modal isOpen={this.state.activeModal} size='lg'>
                 <ModalHeader toggle={this.hideModalEdit}>Butiran Cawangan </ModalHeader>
                 <ModalBody>
-
                     <Container>
-
                         <div className="form-wizard-content">
                             <Row>
-                                <Col md={6}>
-                                    <FormGroup>
-                                        <Label>Cawangan </Label>
-                                        <Input name="branch" type="select" id='position'
-                                               value={this.state.modalData.cawangan}
-                                               defaultValue={''}
-                                               onChange={(dataEl) => {
-                                                   this.state.modalData.cawangan = dataEl.target.value;
-                                                   this.setState({selectedState: dataEl.target.value});
-                                               }}
-                                               >
-
-                                            <option key={''} value={''} disabled>Sila pilih</option>
-                                            {allState.map(option => (
-                                                <option key={option} value={option}>
-                                                    {option}
-                                                </option>
-                                            ))}
-
-                                        </Input>
-                                    </FormGroup>
-                                </Col>
-                                <Col md={6}>
-                                    <FormGroup>
-                                        <Label>IBD No</Label>
-                                        <Input type="text"
-                                               name={'ibdNo'}
-                                               value={this.state.modalData.ibdNo}
-                                               onChange={(dataEl) => {
-                                                   this.state.modalData.ibdNo = dataEl.target.value;
-                                                   this.setState({ibdNo: dataEl.target.value});
-                                               }}
-                                               placeholder="Taip di sini"/>
-                                        <FormFeedback>Required.</FormFeedback>
-                                    </FormGroup>
-                                </Col>
-                                <Col md={6}>
-                                    <FormGroup>
-                                        <Label for="negeri">
-                                            Serial No</Label>
-                                        <Input type="text"
-                                               name={'serialNo'}
-                                               value={this.state.modalData.serialNo}
-                                               onChange={(dataEl) => {
-                                                   this.state.modalData.serialNo = dataEl.target.value;
-                                                   this.setState({serialNo: dataEl.target.value});
-                                               }}
-                                               placeholder="Taip di sini"/>
-                                    </FormGroup>
-                                </Col>
-                                <Col md={6}>
-                                    <FormGroup>
-                                        <Label>RFID No.</Label>
-                                        <Input type="text"
-                                               name={'rfid'}
-                                               value={this.state.modalData.rfidNo}
-                                               onChange={(dataEl) => {
-                                                   this.state.modalData.rfidNo = dataEl.target.value;
-                                                   this.setState({rfid: dataEl.target.value});
-                                               }}
-                                               placeholder="Taip di sini"/>
-                                    </FormGroup>
-                                </Col>
                                 <Col md={6}>
                                     <FormGroup>
                                         <Label>Status</Label>
@@ -188,10 +118,9 @@ export default class EditModal extends React.Component {
                                                defaultValue={''}
                                                onChange={(dataEl) => {
                                                    this.state.modalData.status = dataEl.target.value;
-                                                   this.setState({selectedStatus: dataEl.target.value});
+                                                   this.setState({status: dataEl.target.value});
                                                }}
-                                               >
-
+                                        >
                                             <option key={''} value={''} disabled>Sila pilih</option>
                                             {allStatus.map(option => (
                                                 <option key={option} value={option}>
@@ -202,40 +131,83 @@ export default class EditModal extends React.Component {
                                         </Input>
                                     </FormGroup>
                                 </Col>
-
-
-                                <Col md={6}>
-                                    {/*<FormGroup>*/}
-                                    {/*    <Label>No. Fax</Label>*/}
-                                    {/*    <Input defaultValue={this.state.modalData.fax} type="text"*/}
-                                    {/*           name={'fax'}*/}
-                                    {/*           onChange={(dataEl) => {*/}
-                                    {/*               this.setState({fax: dataEl.target.value});*/}
-                                    {/*           }}*/}
-                                    {/*           placeholder="Type here"/>*/}
-                                    {/*</FormGroup>*/}
+                                <Col md={12}>
+                                    <FormGroup>
+                                        <Label>Nama Tugasan</Label>
+                                        <Input type="text"
+                                               name={'title'}
+                                               value={this.state.modalData.title}
+                                               onChange={(dataEl) => {
+                                                   this.state.modalData.title = dataEl.target.value;
+                                                   this.setState({title: dataEl.target.value});
+                                               }}
+                                               placeholder="Taip di sini"/>
+                                    </FormGroup>
                                 </Col>
-
+                                <Col md={6}>
+                                    <FormGroup>
+                                        <Label>Tarikh Mula</Label>
+                                        <DatePicker type="text" className="form-control"
+                                               name={'title'}
+                                               value={this.state.modalData.dateStart}
+                                               onChange={(dataEl) => {
+                                                   this.state.modalData.dateStart = dataEl.target.value;
+                                                   this.setState({dateStart: dataEl.target.value});
+                                               }} dateFormat="d/M/yyyy"/>
+                                        <FormFeedback>Required.</FormFeedback>
+                                    </FormGroup>
+                                </Col>
+                                <Col md={6}>
+                                    <FormGroup>
+                                        <Label>Tarikh Tamat</Label>
+                                        <DatePicker type="text" className="form-control"
+                                                    name={'title'}
+                                                    value={this.state.modalData.dateEnd}
+                                                    onChange={(dataEl) => {
+                                                        this.state.modalData.dateEnd = dataEl.target.value;
+                                                        this.setState({dateEnd: dataEl.target.value});
+                                                    }} dateFormat="d/M/yyyy"/>
+                                    </FormGroup>
+                                </Col>
+                                <Col md={12}>
+                                    <FormGroup>
+                                        <Label>Huraian</Label>
+                                        <Input type="textarea"
+                                               name={'description'}
+                                               value={this.state.modalData.description}
+                                               onChange={(dataEl) => {
+                                                   this.state.modalData.description = dataEl.target.value;
+                                                   this.setState({description: dataEl.target.value});
+                                               }}
+                                               placeholder="Taip di sini"/>
+                                    </FormGroup>
+                                </Col>
+                                <Col md={12}>
+                                    <FormGroup>
+                                        <Label>Repot</Label>
+                                        <Input type="textarea"
+                                               name={'report'}
+                                               value={this.state.modalData.report}
+                                               onChange={(dataEl) => {
+                                                   this.state.modalData.report = dataEl.target.value;
+                                                   this.setState({report: dataEl.target.value});
+                                               }}
+                                               placeholder="Taip di sini"/>
+                                    </FormGroup>
+                                </Col>
                             </Row>
-
                         </div>
-
                     </Container>
-
                 </ModalBody>
                 <ModalFooter>
-                    {global.position !== 'HQ' &&
                         <Button color="success" className='mb-2 mr-2 btn-icon btn-shadow btn-outline-2x' outline
                             style={{width: '140px'}}
-                            onClick={this.editBranch.bind(this, this.state.modalData.id)}><i
+                            onClick={this.editBranch.bind(this, this.state.modalData.id)}
+                        ><i
                         className="lnr-checkmark-circle btn-icon-wrapper"> </i>Kemaskini</Button>
-                    }
-
-
                     <Button color="danger" className='mb-2 mr-2 btn-icon btn-shadow btn-outline-2x'
                             style={{width: '140px'}}    outline onClick={this.hideModalEdit}> <i
                         className="lnr-cross-circle btn-icon-wrapper"> </i> Tutup</Button>
-
                 </ModalFooter>
             </Modal>
         );

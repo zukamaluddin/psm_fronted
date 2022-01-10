@@ -140,19 +140,38 @@ export default class ListBranch extends React.Component {
                 }, this.loadData);
             }.bind(this),
         );
-
     }
 
 
     render() {
 
         const {data} = this.state;
-
         return (
-
             <Card className="main-card mb-3">
                 <CardBody>
-                    {global.position === 'HQ' ?
+                    <div>
+                        <Button style={{width: '140px'}}
+                                onClick={() => {
+                                    this.props.history.push('/branch/register');
+                                    setTimeout(function () {
+                                        branchMenu.changeActiveLinkTo('#/branch/register');
+                                    }.bind(this),);
+                                }}
+
+                                className="mb-2 mr-2 btn-icon btn-shadow btn-outline-2x" outline
+                                color="success">
+                            <i className="lnr-user btn-icon-wrapper"> </i>
+                            Tambah
+                        </Button>
+                        <Button style={{width: '140px'}}
+                                onClick={() => {
+                                    this.deleteModal.current.toggleModalDeleteAll(this.selectedDataAssign);
+                                }}
+                                className="mb-2 mr-2 btn-icon btn-shadow btn-outline-2x" outline
+                                color="danger">
+                            <i className="lnr-cross-circle btn-icon-wrapper"> </i>
+                            Hapus
+                        </Button>
                         <Button style={{width: '140px'}}
                                 onClick={() => {
                                     this.setState({
@@ -184,63 +203,8 @@ export default class ListBranch extends React.Component {
                             <i className="lnr-sync btn-icon-wrapper"> </i>
                             Refresh
                         </Button>
-                        :
-                        <div>
-                            <Button style={{width: '140px'}}
-                                    onClick={() => {
-                                        this.props.history.push('/branch/register');
-                                        setTimeout(function () {
-                                            branchMenu.changeActiveLinkTo('#/branch/register');
-                                        }.bind(this),);
-                                    }}
+                    </div>
 
-                                    className="mb-2 mr-2 btn-icon btn-shadow btn-outline-2x" outline
-                                    color="success">
-                                <i className="lnr-user btn-icon-wrapper"> </i>
-                                Tambah
-                            </Button>
-                            <Button style={{width: '140px'}}
-                                    onClick={() => {
-                                        this.deleteModal.current.toggleModalDeleteAll(this.selectedDataAssign);
-                                    }}
-                                    className="mb-2 mr-2 btn-icon btn-shadow btn-outline-2x" outline
-                                    color="danger">
-                                <i className="lnr-cross-circle btn-icon-wrapper"> </i>
-                                Hapus
-                            </Button>
-                            <Button style={{width: '140px'}}
-                                    onClick={() => {
-                                        this.setState({
-                                            filtered: [],
-                                            sorted: [{id: 'code', desc: true}],
-                                            currentPage: 0,
-                                            loading: true
-                                        });
-
-                                        let dataSelected = this.state.data;
-
-                                        let isSelected = [];
-                                        Object.keys(dataSelected).map(function (key, value) {
-                                            isSelected.push(dataSelected[key]['id'])
-                                        });
-                                        for (let i = 0; i < isSelected.length; i++) {
-                                            this.state.selected[isSelected[i]] = false;
-                                        }
-                                        this.state.selectAll = 0;
-                                        this.fetchData({
-                                            filtered: [],
-                                            page: 0,
-                                            pageSize: 10,
-                                            sorted: [{id: 'code', desc: true}]
-                                        });
-                                    }}
-                                    className="mb-2 mr-2 btn-icon btn-shadow btn-outline-2x" outline
-                                    color="info">
-                                <i className="lnr-sync btn-icon-wrapper"> </i>
-                                Refresh
-                            </Button>
-                        </div>
-                    }
                     <ReactTable
                         onFetchData={(state, instance) => {
                             this.setState({loading: true});
@@ -291,26 +255,31 @@ export default class ListBranch extends React.Component {
                                     filterable: false,
                                     width: 50
                                 },
+                                // {
+                                //     Header: 'Cawangan',
+                                //     accessor: 'cawangan',width: 200,
+                                //     Cell: row => <div style={{ textAlign: "center",width:'100%'}}>{row.value}</div>,
+                                // },
+
                                 {
-                                    Header: 'Cawangan',
-                                    accessor: 'cawangan',width: 200,
+                                    Header: 'Nama Tugasan',
+                                    accessor: 'title',
+                                    // width: 200,
                                     Cell: row => <div style={{ textAlign: "center",width:'100%'}}>{row.value}</div>,
-                                }, {
-                                    Header: 'RFID No',
-                                    accessor: 'rfidNo',
-                                    // width: 150
                                 },
                                 {
-                                    Header: 'IBD No.',
-                                    accessor: 'ibdNo',
-                                    // width: 150,
-                                }, {
-                                    Header: 'Serial No',
-                                    accessor: 'serialNo',
-                                    // width: 150
-                                }, {
+                                    Header: 'Tarikh Mula',
+                                    accessor: 'dateStart',
+                                    width: 200
+                                },
+                                {
+                                    Header: 'Tarikh Akhir',
+                                    accessor: 'dateEnd',
+                                    width: 200,
+                                },
+                                {
                                     Header: 'Status',
-                                    accessor: 'status',width: 100,
+                                    accessor: 'status',width: 200,
                                     filterable: false
                                 },  {
                                     Header: 'Aksi',
@@ -318,23 +287,23 @@ export default class ListBranch extends React.Component {
                                     filterable: false,
                                     width: 100,
                                     Cell: row => (
-                                        global.position === 'HQ' ?
-                                        <div
-                                            className="widget-content-right widget-content-actions"
-                                            style={{textAlign: 'center', width: '100%'}}>
-
-                                            <Button className="border-0 btn-transition"
-                                                    onClick={() => {
-                                                        this.editModal.current.showModalEdit(row);
-                                                    }}
-                                                    outline
-                                                    color="success">
-                                                <FontAwesomeIcon icon={faEye}/>
-                                            </Button>
-
-                                            <EditModal ref={this.editModal} getdata={this.fetchData}/>
-                                            </div>
-                                            :
+                                        // global.position === 'HQ' ?
+                                        // <div
+                                        //     className="widget-content-right widget-content-actions"
+                                        //     style={{textAlign: 'center', width: '100%'}}>
+                                        //
+                                        //     <Button className="border-0 btn-transition"
+                                        //             onClick={() => {
+                                        //                 this.editModal.current.showModalEdit(row);
+                                        //             }}
+                                        //             outline
+                                        //             color="success">
+                                        //         <FontAwesomeIcon icon={faEye}/>
+                                        //     </Button>
+                                        //
+                                        //     <EditModal ref={this.editModal} getdata={this.fetchData}/>
+                                        //     </div>
+                                        //     :
                                             <div
                                                 className="widget-content-right widget-content-actions"
                                                 style={{textAlign: 'center', width: '100%'}}>

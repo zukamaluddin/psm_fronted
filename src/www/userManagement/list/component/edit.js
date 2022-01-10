@@ -89,7 +89,7 @@ export default class EditModal extends React.Component {
 
     submitEditUser(userid) {
         let data = {
-            role: this.state.modalData.role,
+            role: this.state.modalData.position,
             status: this.state.modalData.status,
 
             staffId: this.state.modalData.staffId,
@@ -225,9 +225,8 @@ export default class EditModal extends React.Component {
                                                                }}
                                                         >
                                                             <option key={''} value={''} disabled>Pilih Jawatan</option>
-                                                            <option key={'HQ'} value={'HQ'}>HQ</option>
-                                                            {/*<option key={'Manager Negeri'} value={'Manager Negeri'}>Manager Negeri</option>*/}
-                                                            <option key={'Manager Cawangan'} value={'Manager Cawangan'}>Manager Cawangan</option>
+                                                            <option key={'Admin'} value={'Admin'}>Admin</option>
+                                                            <option key={'Pentadbir'} value={'Pentadbir'}>Pentadbir</option>
                                                             <option key={'Staf'} value={'Staf'}>Staf</option>
 
                                                         </Input>
@@ -254,24 +253,24 @@ export default class EditModal extends React.Component {
                                             </Row>
 
                                             <Row>
-                                                <Col sm={6}>
-                                                    <FormGroup>
-                                                        <Label for="branch">Cawangan</Label>
-                                                        <Input name="branch" type="select" id='position'
-                                                               value={this.state.branch}
-                                                               onChange={(dataEl) => {
-                                                                   this.state.modalData.branch = dataEl.target.value;
-                                                                   this.setState({branch: dataEl.target.value});
-                                                               }}
-                                                        >
-                                                            <option key={''} value={''} disabled>Sila pilih</option>
-                                                            <option key={'Pekan, Pahang'} value={'Pekan, Pahang'}>Pekan, Pahang</option>
-                                                            <option key={'Kulim, Kedah'} value={'Kulim, Kedah'}>Kulim, Kedah</option>
-                                                            <option key={'Padang Besar, Perlis'} value={'Padang Besar, Perlis'}>Padang Besar, Perlis</option>
+                                                {/*<Col sm={6}>*/}
+                                                {/*    <FormGroup>*/}
+                                                {/*        <Label for="branch">Cawangan</Label>*/}
+                                                {/*        <Input name="branch" type="select" id='position'*/}
+                                                {/*               value={this.state.branch}*/}
+                                                {/*               onChange={(dataEl) => {*/}
+                                                {/*                   this.state.modalData.branch = dataEl.target.value;*/}
+                                                {/*                   this.setState({branch: dataEl.target.value});*/}
+                                                {/*               }}*/}
+                                                {/*        >*/}
+                                                {/*            <option key={''} value={''} disabled>Sila pilih</option>*/}
+                                                {/*            <option key={'Pekan, Pahang'} value={'Pekan, Pahang'}>Pekan, Pahang</option>*/}
+                                                {/*            <option key={'Kulim, Kedah'} value={'Kulim, Kedah'}>Kulim, Kedah</option>*/}
+                                                {/*            <option key={'Padang Besar, Perlis'} value={'Padang Besar, Perlis'}>Padang Besar, Perlis</option>*/}
 
-                                                        </Input>
-                                                    </FormGroup>
-                                                </Col>
+                                                {/*        </Input>*/}
+                                                {/*    </FormGroup>*/}
+                                                {/*</Col>*/}
                                                 <Col sm={6}>
                                                     <Label for="status">Status</Label>
 
@@ -368,12 +367,10 @@ export default class EditModal extends React.Component {
                     </div>
                 </ModalBody>
                 <ModalFooter>
-                    {global.position !== 'HQ' &&
                     <Button color="success" className='mb-2 mr-2 btn-icon btn-shadow btn-outline-2x' outline
                             style={{width: '140px'}}
                             onClick={this.submitEditUser.bind(this, this.state.modalData.id)}><i
                         className="lnr-checkmark-circle btn-icon-wrapper"> </i>Kemaskini</Button>
-                    }
                     <Button color="danger" className='mb-2 mr-2 btn-icon btn-shadow btn-outline-2x'
                             outline onClick={this.hideModalEdit} style={{width: '140px'}}> <i
                         className="lnr-cross-circle btn-icon-wrapper"> </i> Tutup</Button>

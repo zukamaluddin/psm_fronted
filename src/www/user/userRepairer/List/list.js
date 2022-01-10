@@ -461,7 +461,7 @@ export default class ListForm extends React.Component {
                     transitionLeave={false}>
                     <div>
                         <PageTitle
-                            heading="Senarai Laporan IBD"
+                            heading="Senarai Surat Lantikan"
                             icon="pe-7s-tools icon-gradient bg-tempting-azure"
                         />
                     </div>

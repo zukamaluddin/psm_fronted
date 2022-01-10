@@ -87,7 +87,7 @@ export default class ListMember extends React.Component {
                     transitionLeave={false}>
                     <div>
                         <PageTitle
-                            heading="Senarai Mesin"
+                            heading="Senarai Tugasan"
                             // subheading="Memaparkan member member punya hutang."
                             icon="pe-7s-culture icon-gradient bg-tempting-azure"
                         />

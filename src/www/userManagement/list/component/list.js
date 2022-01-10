@@ -186,7 +186,7 @@ export default class ListUser extends React.Component {
 
             <Card className="main-card mb-3">
                 <CardBody>
-                    {global.position === 'HQ' ?
+                    {/* {global.position === 'HQ' ? Bob
                         <Button style={{width: '140px'}}
                                 onClick={() => {
                                     this.setState({
@@ -219,7 +219,7 @@ export default class ListUser extends React.Component {
                             Refresh
                         </Button>
 
-                        :
+                        : */}
                         <div>
                             <Button style={{width: '140px'}}
                                     onClick={() => {
@@ -275,7 +275,7 @@ export default class ListUser extends React.Component {
                                 Refresh
                             </Button>
                         </div>
-                    }
+                    {/* } Bob*/}
                     <ReactTable
                         data={data}
                         // filterable
@@ -327,6 +327,13 @@ export default class ListUser extends React.Component {
                                     sortable: false,
                                     filterable: false,
                                     width: 50
+                                },{
+                                    Header: 'Staf ID',
+                                    id:'staffId',
+                                    accessor: dt => dt.staffId,
+                                    sortable: false,
+                                    filterable: false,
+                                    width: 200,
                                 },
                                 {
                                     Header: 'Nama',
@@ -339,14 +346,6 @@ export default class ListUser extends React.Component {
                                     accessor: 'email',
                                     filterable: false,
                                     width: 250,
-                                },
-                                {
-                                    Header: 'Cawangan',
-                                    id:'branch',
-                                    accessor: dt => dt.branch,
-                                    sortable: false,
-                                    filterable: false,
-                                    width: 200,
                                 },
                                 {
                                     Header: 'Jawatan',
@@ -380,25 +379,25 @@ export default class ListUser extends React.Component {
                                     filterable: false,
                                     width: 150,
                                     Cell: row => (
-                                        global.position === 'HQ' ?
-                                            <div
-                                                className="widget-content-right widget-content-actions"
-                                                style={{textAlign: 'center', width: '100%'}}>
-
-                                                <Button className="border-0 btn-transition"
-                                                        onClick={() => {
-                                                            this.editModal.current.showModalEdit(row);
-                                                        }}
-                                                        outline
-                                                        color="success">
-                                                    <FontAwesomeIcon icon={faEye}/>
-                                                </Button>
-
-
-                                                <EditModal ref={this.editModal} getdata={this.fetchData}/>
-                                            </div>
-
-                                            :
+                                        // global.position === 'HQ' ?
+                                        //     <div
+                                        //         className="widget-content-right widget-content-actions"
+                                        //         style={{textAlign: 'center', width: '100%'}}>
+                                        //
+                                        //         <Button className="border-0 btn-transition"
+                                        //                 onClick={() => {
+                                        //                     this.editModal.current.showModalEdit(row);
+                                        //                 }}
+                                        //                 outline
+                                        //                 color="success">
+                                        //             <FontAwesomeIcon icon={faEye}/>
+                                        //         </Button>
+                                        //
+                                        //
+                                        //         <EditModal ref={this.editModal} getdata={this.fetchData}/>
+                                        //     </div>
+                                        //
+                                        //     :
                                             <div
                                                 className="widget-content-right widget-content-actions"
                                                 style={{textAlign: 'center', width: '100%'}}>

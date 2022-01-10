@@ -100,7 +100,6 @@ export default class WizardStep3 extends React.Component {
                 <div className="form-wizard-content">
                     <div id="accordion" className="accordion-wrapper mb-3">
                         <Card>
-
                             <CardHeader id="headingOne">
                                 <Button block color="link" className="text-left m-0 p-0"
                                     // onClick={() => this.toggleAccordion(0)}
@@ -184,11 +183,9 @@ export default class WizardStep3 extends React.Component {
                                                                invalid={this.props.validForm.position}
                                                         >
                                                             <option key={''} value={''} disabled>Sila pilih</option>
-                                                            <option key={'HQ'} value={'HQ'}>HQ</option>
-                                                            {/*<option key={'Manager Negeri'} value={'Manager Negeri'}>Manager Negeri</option>*/}
-                                                            <option key={'Manager Cawangan'} value={'Manager Cawangan'}>Manager Cawangan</option>
+                                                            <option key={'Admin'} value={'Admin'}>Admin</option>
+                                                            <option key={'Pentadbir'} value={'Pentadbir'}>Pentadbir</option>
                                                             <option key={'Staf'} value={'Staf'}>Staf</option>
-                                                            {/*<option key={'KPDNHEP'} value={'KPDNHEP'}>KPDNHEP</option>*/}
                                                         </Input>
                                                         <FormFeedback><i>Wajib diisi</i></FormFeedback>
                                                     </FormGroup>
@@ -197,39 +194,39 @@ export default class WizardStep3 extends React.Component {
                                                 </Col>
                                             </Row>
                                             <Row>
-                                                <Col sm={6}>
-                                                    <FormGroup>
-                                                        <Label for="position1">Cawangan</Label>
-                                                        <Input name="branch" type="select" id='position'
-                                                               value={this.props.registerData.branch}
-                                                               onChange={(dataEl) => {
-                                                                   this.setState({registerData: {branch: dataEl.target.value}});
-                                                                   this.props.registerData.branch = dataEl.target.value;
-                                                               }}
-                                                               invalid={this.props.validForm.position}
-                                                        >
-                                                            <option key={''} value={''} disabled>Sila pilih</option>
-                                                            <option key={'Pekan, Pahang'} value={'Pekan, Pahang'}>Pekan, Pahang</option>
-                                                            <option key={'Kulim, Kedah'} value={'Kulim, Kedah'}>Kulim, Kedah</option>
-                                                            <option key={'Padang Besar, Perlis'} value={'Padang Besar, Perlis'}>Padang Besar, Perlis</option>
-                                                        </Input>
-                                                        {/*<Input name="branch" type="select" id='position'*/}
-                                                        {/*       value={this.props.registerData.branch}*/}
-                                                        {/*       onChange={(dataEl) => {*/}
-                                                        {/*           this.setState({registerData: {branch: dataEl.target.value}});*/}
-                                                        {/*           this.props.registerData.branch = dataEl.target.value;*/}
-                                                        {/*       }}*/}
-                                                        {/*>*/}
-                                                        {/*    <option key={''} value={''} disabled>Sila pilih</option>*/}
-                                                        {/*    {branchData.map(option => (*/}
-                                                        {/*        <option key={option.id} value={option.id}>*/}
-                                                        {/*            {option.code} - {option.kawasan}*/}
-                                                        {/*        </option>*/}
-                                                        {/*    ))}*/}
+                                                {/*<Col sm={6}>*/}
+                                                {/*    <FormGroup>*/}
+                                                {/*        <Label for="position1">Cawangan</Label>*/}
+                                                {/*        <Input name="branch" type="select" id='position'*/}
+                                                {/*               value={this.props.registerData.branch}*/}
+                                                {/*               onChange={(dataEl) => {*/}
+                                                {/*                   this.setState({registerData: {branch: dataEl.target.value}});*/}
+                                                {/*                   this.props.registerData.branch = dataEl.target.value;*/}
+                                                {/*               }}*/}
+                                                {/*               invalid={this.props.validForm.position}*/}
+                                                {/*        >*/}
+                                                {/*            <option key={''} value={''} disabled>Sila pilih</option>*/}
+                                                {/*            <option key={'Pekan, Pahang'} value={'Pekan, Pahang'}>Pekan, Pahang</option>*/}
+                                                {/*            <option key={'Kulim, Kedah'} value={'Kulim, Kedah'}>Kulim, Kedah</option>*/}
+                                                {/*            <option key={'Padang Besar, Perlis'} value={'Padang Besar, Perlis'}>Padang Besar, Perlis</option>*/}
+                                                {/*        </Input>*/}
+                                                {/*        /!*<Input name="branch" type="select" id='position'*!/*/}
+                                                {/*        /!*       value={this.props.registerData.branch}*!/*/}
+                                                {/*        /!*       onChange={(dataEl) => {*!/*/}
+                                                {/*        /!*           this.setState({registerData: {branch: dataEl.target.value}});*!/*/}
+                                                {/*        /!*           this.props.registerData.branch = dataEl.target.value;*!/*/}
+                                                {/*        /!*       }}*!/*/}
+                                                {/*        /!*>*!/*/}
+                                                {/*        /!*    <option key={''} value={''} disabled>Sila pilih</option>*!/*/}
+                                                {/*        /!*    {branchData.map(option => (*!/*/}
+                                                {/*        /!*        <option key={option.id} value={option.id}>*!/*/}
+                                                {/*        /!*            {option.code} - {option.kawasan}*!/*/}
+                                                {/*        /!*        </option>*!/*/}
+                                                {/*        /!*    ))}*!/*/}
 
-                                                        {/*</Input>*/}
-                                                    </FormGroup>
-                                                </Col>
+                                                {/*        /!*</Input>*!/*/}
+                                                {/*    </FormGroup>*/}
+                                                {/*</Col>*/}
                                                 <Col sm={6}>
                                                     <Label for="exampleEmail2">Status <span
                                                         style={{color: 'red'}}>*</span></Label>

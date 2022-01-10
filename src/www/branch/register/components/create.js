@@ -23,16 +23,20 @@ import { branchMenu} from "../../../../Layout/AppNav/VerticalNavWrapper"; //load
 import _ from 'lodash';
 import API from "../../../../utils/apiBranch";
 import LaddaButton, {EXPAND_LEFT} from "react-ladda";
+import moment from "moment";
+import DatePicker from "react-datepicker";
 
 export const allState = ['Pekan, Pahang', 'Kulim, Kedah', 'Padang Besar, Perlis'];
-
+export const allLantikan = ['Sekolah','SPACE','Fakulti','TNCPI'];
 export const allStatus = ['Aktif', 'Rosak', 'Baiki'];
 
 class CreateComp extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            validForm: {},branchCodeApi: null
+            validForm: {},branchCodeApi: null,
+            dateStart: '',
+            dateEnd: '',
         };
 
         this.submit = this.submit.bind(this);
@@ -64,18 +68,12 @@ class CreateComp extends React.Component {
         // (this.state.fax === '' || this.state.fax === undefined) ? copy.fax = true : copy.fax = false;
 
         this.setState({validForm: copy}, function () {
-                let cawangan = "";
-                if(global.role == "HQ"){
-                    cawangan = this.state.selectedState
-                }else{
-                    cawangan = global.token
-                }
 
                 let data = {
-                    cawangan: cawangan,
-                    ibdNo: this.state.ibdNo,
-                    serialNo: this.state.serialNo,
-                    rfid: this.state.rfid,
+                    title: this.state.title,
+                    dateStart: moment(this.state.dateStart).format('D/M/YYYY'),
+                    dateEnd: moment(this.state.dateEnd).format('D/M/YYYY'),
+                    description: this.state.description,
                     status: this.state.selectedStatus,
                 };
                 const formData = new FormData();
@@ -83,7 +81,7 @@ class CreateComp extends React.Component {
 
                 return new Promise((resolve, reject) => {
 
-                    fetch(global.ipServer + 'mesin/create', {
+                    fetch(global.ipServer + 'tugasan/create', {
                         method: 'POST',
                         body: formData,
                         headers: {
@@ -119,122 +117,17 @@ class CreateComp extends React.Component {
             // }else {
             //     toast.warn("Sila isi ruang yang wajib");
             // }
-
         });
-
-
-
     }
-
 
     render() {
         // alert(global.role)
         return (
             <Card className="main-card mb-3">
-
                 <CardBody>
-
                     <Container>
-
                         <div className="form-wizard-content">
                             <Row onKeyDown={this.handleKeyDown}>
-                                {/*<Col md={6}>*/}
-                                {/*    <FormGroup>*/}
-                                {/*        <Label>Kod Cawangan </Label>*/}
-                                {/*        <Input type="text"*/}
-                                {/*               name='branchCode'*/}
-                                {/*               placeholder={'Taip di sini'}*/}
-                                {/*               onChange={(dataEl) => {*/}
-                                {/*                   this.setState({branchCode: dataEl.target.value});*/}
-                                {/*                   this.validateBranchApi(dataEl.target.value);*/}
-                                {/*               }}*/}
-                                {/*               invalid={this.state.validForm.branchCode || this.state.branchCodeApi}*/}
-                                {/*        />*/}
-                                {/*        {this.state.validForm.branchCode ?<FormFeedback><i>Wajib diisi</i></FormFeedback>:''}*/}
-                                {/*        {this.state.branchCodeApi ? <FormFeedback><i>Kod cawangan sudah wujud</i></FormFeedback>:''}*/}
-                                {/*    </FormGroup>*/}
-                                {/*</Col>*/}
-                                {/*<Col md={6}>*/}
-                                {/*    <FormGroup>*/}
-                                {/*        <Label>Kawasan</Label>*/}
-                                {/*        <Input type="text"*/}
-                                {/*               name='regional'*/}
-                                {/*               onChange={(dataEl) => {*/}
-                                {/*                   this.setState({regional: dataEl.target.value});*/}
-                                {/*               }}*/}
-                                {/*               placeholder="Taip di sini"*/}
-                                {/*               invalid={this.state.validForm.regional}*/}
-                                {/*        />*/}
-                                {/*        <FormFeedback><i>Wajib diisi</i></FormFeedback>*/}
-                                {/*    </FormGroup>*/}
-                                {/*</Col>*/}
-                                <Col md={6}>
-                                    <FormGroup>
-                                        <Label for="negeri">Cawangan</Label>
-                                        {global.role == "HQ" ?
-                                            <div>
-                                                <Input name="branch" type="select" id='position'
-                                                value={this.state.selectedState}
-                                                defaultValue={''}
-                                                onChange={(dataEl) => {
-                                                this.setState({selectedState: dataEl.target.value});
-                                            }}
-                                                invalid={this.state.validForm.selectedState}>
-
-                                                <option key={''} value={''} disabled>Sila pilih</option>
-                                            {allState.map(option => (
-                                                <option key={option} value={option}>
-                                            {option}
-                                                </option>
-                                                ))}
-
-                                                </Input>
-                                                <FormFeedback><i>Wajib diisi</i></FormFeedback>
-                                            </div>:
-                                            <div>
-                                                <Input type="text" disabled
-                                                        value={global.token}
-                                                       />
-                                            </div>
-                                            }
-
-                                    </FormGroup>
-                                </Col>
-                                <Col md={6}>
-                                    <FormGroup>
-                                        <Label>IBD No.</Label>
-                                        <Input type="text"
-                                               name={'ibdNo'}
-                                               onChange={(dataEl) => {
-                                                   this.setState({ibdNo: dataEl.target.value});
-                                               }}
-                                               placeholder="Taip di sini"/>
-                                    </FormGroup>
-                                </Col>
-                                <Col md={6}>
-                                    <FormGroup>
-                                        <Label>Serial No.</Label>
-                                        <Input type="text"
-                                               name={'serialNo'}
-                                               onChange={(dataEl) => {
-                                                   this.setState({serialNo: dataEl.target.value});
-                                               }}
-                                               placeholder="Taip di sini"/>
-                                    </FormGroup>
-                                </Col>
-                                <Col md={6}>
-                                    <FormGroup>
-                                        <Label>RFID No.</Label>
-                                        <Input type="text"
-                                               name={'rfid'}
-                                               onChange={(dataEl) => {
-                                                   this.setState({rfid: dataEl.target.value});
-                                               }}
-                                               placeholder="Taip di sini"/>
-                                    </FormGroup>
-                                </Col>
-
-
                                 <Col md={6}>
                                     <FormGroup>
                                         <Label>Status</Label>
@@ -247,23 +140,61 @@ class CreateComp extends React.Component {
                                                invalid={this.state.validForm.selectedState}>
 
                                             <option key={''} value={''} disabled>Sila pilih</option>
-                                            {allStatus.map(option => (
-                                                <option key={option} value={option}>
-                                                    {option}
-                                                </option>
-                                            ))}
-
+                                            <option key={'Baru'} value={'Baru'}>Baru</option>
+                                            <option key={'Dalam Progres'} value={'Dalam Progres'}>Dalam Progres</option>
+                                            <option key={'Selesai'} value={'Selesai'}>Selesai</option>
                                         </Input>
                                     </FormGroup>
                                 </Col>
-
+                                <Col md={12}>
+                                    <FormGroup>
+                                        <Label>Nama Tugasan</Label>
+                                        <Input type="text"
+                                               name={'title'}
+                                               onChange={(dataEl) => {
+                                                   this.setState({title: dataEl.target.value});
+                                               }}
+                                               placeholder="Taip di sini"/>
+                                    </FormGroup>
+                                </Col>
+                                <Col md={6}>
+                                    <FormGroup>
+                                        <Label>Tarikh Mula</Label>
+                                        <DatePicker className="form-control"
+                                                    selected={this.state.dateStart}
+                                                    onChange={(e) => {
+                                                        this.setState({dateStart: e})
+                                                    }}
+                                                    dateFormat="d/M/yyyy"/>
+                                    </FormGroup>
+                                </Col>
+                                <Col md={6}>
+                                    <FormGroup>
+                                        <Label>Tarikh Tamat</Label>
+                                        <DatePicker className="form-control"
+                                                    selected={this.state.dateEnd}
+                                                    onChange={(e) => {
+                                                        this.setState({dateEnd: e})
+                                                        // this.setState({dateEnd: e}, () => onChange(moment(e).format('D/M/YYYY')))
+                                                    }}
+                                                    dateFormat="d/M/yyyy"
+                                        />
+                                    </FormGroup>
+                                </Col>
+                                <Col md={12}>
+                                    <FormGroup>
+                                        <Label>Huraian</Label>
+                                        <Input type="textarea"
+                                               name={'description'}
+                                               onChange={(dataEl) => {
+                                                   this.setState({description: dataEl.target.value});
+                                               }}
+                                               placeholder="Taip di sini"/>
+                                    </FormGroup>
+                                </Col>                
                             </Row>
-
                         </div>
-
                     </Container>
-
-
                 </CardBody>
                 <CardFooter>
                     <Col style={{width:'100%'}}>
@@ -272,16 +203,12 @@ class CreateComp extends React.Component {
                             // loading={this.state.expLeft}
                             onClick={this.submit}
                             data-style={EXPAND_LEFT}
-                            style={{width: '140px'}}
-                        >
+                            style={{width: '140px'}}>
                             <i className="pe-7s-diskette btn-icon-wrapper"> </i>Simpan
                         </LaddaButton>
-
                     </Col>
                 </CardFooter>
             </Card>
-
-
         );
     }
 }

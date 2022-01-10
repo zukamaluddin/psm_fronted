@@ -2,7 +2,7 @@ export default {
 
     listBranch: (data) => {
         return new Promise((resolve, reject) => {
-            fetch(global.ipServer + "mesin/list/" + global.global_id, {
+            fetch(global.ipServer + "tugasan/list/" + global.global_id, {
                 method: 'POST', body: JSON.stringify(data),
                 headers: {
                     'Content-Type': 'application/json',
@@ -36,7 +36,7 @@ export default {
     deleteBranch: (data) => {
         return new Promise((resolve, reject) => {
 
-            fetch(global.ipServer + `mesin/delete`, {
+            fetch(global.ipServer + `tugasan/delete`, {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json',
@@ -55,7 +55,7 @@ export default {
     viewBranch: (rowid) => {
         return new Promise((resolve, reject) => {
 
-            fetch(global.ipServer + "mesin/view/" + rowid, {
+            fetch(global.ipServer + "tugasan/view/" + rowid, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
@@ -66,7 +66,6 @@ export default {
                 .then((result) => {
                     return resolve(result)
                 })
-
         });
     },
     checkBranch: (code) => {
