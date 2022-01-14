@@ -112,14 +112,14 @@ const AppMain = () => {
                 </div>
             }>
                 <Switch>
-                    {/*<Route path="/401" component={Page401}/>*/}
+                    {/*<Route path="/401" componentPentadbiran={Page401}/>*/}
                     <Route exact path="/forgot-password" component={Auth}/>
                     <Route exact path="/reset-password/:token" component={Auth}/>
                     <Route exact path="/register" component={Auth}/>
                     <Route path="/branch" component={branch}/>
                     <Route path="/owner" component={userOwner}/>
                     <Route path="/repairer" component={userRepairer}/>
-                    {/*<Route path="/certificate" component={certificateNav}/>*/}
+                    {/*<Route path="/certificate" componentPentadbiran={certificateNav}/>*/}
                     <Route path="/Equipment" component={equipment}/>
                     <Route path="/report" component={report}/>
                     <Route path="/setting" component={setting}/>
@@ -159,7 +159,7 @@ const AppMain = () => {
                     }
 
 
-                    {/*<Route component={Page404}/>*/}
+                    {/*<Route componentPentadbiran={Page404}/>*/}
 
                 </Switch>
 

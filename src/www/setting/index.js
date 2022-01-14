@@ -6,8 +6,9 @@ import AppSidebar from '../../Layout/AppSidebar/';
 import AppFooter from '../../Layout/AppFooter/';
 
 import ThemeOptions from '../../Layout/ThemeOptions/';
-import Caj from "./caj";
-import List from "./List/list";
+import Pentadbiran from "./pentadbiran";
+import registerPentadbiran from "./registerPentadbiran/main";
+// import List from "./List/list";
 
 
 const Forms = ({match}) => (
@@ -18,7 +19,8 @@ const Forms = ({match}) => (
             <AppSidebar/>
             <div className="app-main__outer">
                 <div className="app-main__inner">
-                    <Route path={`${match.url}/Caj`} component={Caj}/>
+                    <Route path={`${match.url}/pentadbiran`} component={Pentadbiran}/>
+                    <Route path={`${match.url}/registerPentadbiran`} component={registerPentadbiran}/>
                 </div>
                 <AppFooter/>
             </div>

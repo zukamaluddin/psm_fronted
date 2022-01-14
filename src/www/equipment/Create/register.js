@@ -3,7 +3,7 @@ import { Component } from 'react';
 import Select from 'react-select';
 import CreatableSelect from 'react-select/lib/Creatable';
 import {Multiselect} from "react-widgets";
-// import MultiSelect from "react-multi-select-component";
+// import MultiSelect from "react-multi-select-componentPentadbiran";
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import {
     Button, Card, CardBody, Col, Container, Form, FormGroup, Input, Label, Row,

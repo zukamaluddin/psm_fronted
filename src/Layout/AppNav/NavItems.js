@@ -44,33 +44,29 @@ export const userRepairerNav = [
         content: [{
                 label: 'Senarai',
                 to: '#/repairer/list',
-            },
-            {
-                label: 'Lantikan',
-                to: '#/repairer/list',
-            },]
+            }]
     }
 ]
 
-export const settingNav = [
+export const SettingNav = [
     {
         icon: 'pe-7s-tools',
         label: 'Tetapan',
         content: [{
             label: 'Jawatan Pentadbiran',
-            to: '#/setting/list',
+            to: '#/setting/pentadbiran',
         },
         {
             label: 'Jawatan Gred',
-            to: '#/setting/list',
+            to: '#/setting/gred',
         },
         {
             label: 'Lantikan',
-            to: '#/setting/list',
+            to: '#/setting/lantikan',
         },
         {
             label: 'Jawatan Generik',
-            to: '#/setting/list',
+            to: '#/setting/generik',
         }]
     }
 ]
@@ -119,37 +115,37 @@ export const UserManagement = [
 ];
 
 
-let settingContent = function () {
-    // if (localStorage.getItem('position') === "HQ") {
-    //     return [
-    //         {
-    //             icon: 'pe-7s-news-paper',
-    //             label: 'Tetapan',
-    //             content: [
-    //                 {
-    //                     label: 'Caj Tentusah',
-    //                     to: '#/setting/Caj',
-    //                 },
-    //                 // {
-    //                 //     label: 'Senarai Harga',
-    //                 //     to: '#/setting/list',
-    //                 // },
+// let settingContent = function () {
+//     // if (localStorage.getItem('position') === "HQ") {
+//     //     return [
+//     //         {
+//     //             icon: 'pe-7s-news-paper',
+//     //             label: 'Tetapan',
+//     //             content: [
+//     //                 {
+//     //                     label: 'Caj Tentusah',
+//     //                     to: '#/setting/Caj',
+//     //                 },
+//     //                 // {
+//     //                 //     label: 'Senarai Harga',
+//     //                 //     to: '#/setting/list',
+//     //                 // },
+//
+//     //             ]
+//     //         }];
+//     // }
+//     return [
+//         {
+//             icon: 'pe-7s-news-paper',
+//             label: 'Tetapan',
+//             content: [
+//                 {
+//                     label: 'Caj Tentusah',
+//                     to: '#/setting/Caj',
+//                 },
+//             ]
+//         }];
+// };
 
-    //             ]
-    //         }];
-    // }
-    return [
-        {
-            icon: 'pe-7s-news-paper',
-            label: 'Tetapan',
-            content: [
-                {
-                    label: 'Caj Tentusah',
-                    to: '#/setting/Caj',
-                },
-            ]
-        }];
-};
-
-export const SettingNav = settingContent();
+// export const SettingNav = settingContent();
 

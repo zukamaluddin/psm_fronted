@@ -1158,7 +1158,7 @@ export default class ResultList extends React.Component {
 //     CardBody, Col, Row, Table,
 // } from "reactstrap";
 // import ReactCSSTransitionGroup from "react-addons-css-transition-group";
-// import {adjustment, AnimationDiv} from "../../daily/component/list";
+// import {adjustment, AnimationDiv} from "../../daily/componentPentadbiran/list";
 // import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 // import {faFileExcel, faFilePdf, faSort, faSortDown, faSortUp} from "@fortawesome/free-solid-svg-icons";
 // import {PDFExport} from "@progress/kendo-react-pdf";
@@ -1513,7 +1513,7 @@ export default class ResultList extends React.Component {
 //         } else if (this.state.showResult === 'yearly') {
 //             return (
 //                 <ReactCSSTransitionGroup
-//                     component="div"
+//                     componentPentadbiran="div"
 //                     transitionName="TabsAnimation"
 //                     transitionAppear={true}
 //                     transitionAppearTimeout={0}
@@ -1548,7 +1548,7 @@ export default class ResultList extends React.Component {
 //                                 paperSize="A4"
 //                                 landscape={true}
 //                                 margin="1cm"
-//                                 ref={(component) => this.pdfExportComponent = component}
+//                                 ref={(componentPentadbiran) => this.pdfExportComponent = componentPentadbiran}
 //                             >
 //                                 <Row>
 //                                     <Col md={12}><b>Jadual 1.0 Laporan Tahunan Penentusahan Dan Penentusahan

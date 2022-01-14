@@ -11,7 +11,7 @@ import {
     ReportNav,
     DashboardNav,
     lantikanNav,
-    settingNav
+    SettingNav
 } from './NavItems';
 
 export let umMenu;
@@ -64,10 +64,12 @@ class Nav extends Component {
                                branchMenu = r;
                            }}
                 />
-                <MetisMenu content={ settingNav} onSelected={this.toggleMobileSidebar} activeLinkFromLocation
-                           className="vertical-nav-menu" iconNamePrefix="" ref={(r) => {
-                    repairerMenu = r;
-                }} classNameStateIcon="pe-7s-angle-down"/>
+                <MetisMenu content={SettingNav} onSelected={this.toggleMobileSidebar} activeLinkFromLocation
+                           className="vertical-nav-menu" iconNamePrefix="" classNameStateIcon="pe-7s-angle-down"
+                           ref={(r) => {
+                               settingMenu = r;
+                           }}
+                />
             </Fragment>
         );
     }

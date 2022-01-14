@@ -1227,7 +1227,7 @@ export default class MonthlyResult extends React.Component {
 // import ReactCSSTransitionGroup from "react-addons-css-transition-group";
 // import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 // import {faFileExcel, faFilePdf, faSort, faSortDown, faSortUp} from "@fortawesome/free-solid-svg-icons";
-// import {adjustment, AnimationDiv} from "../../daily/component/list";
+// import {adjustment, AnimationDiv} from "../../daily/componentPentadbiran/list";
 // import {PDFExport} from "@progress/kendo-react-pdf";
 // import {Redirect} from "react-router-dom";
 // import {reportMenu} from "../../../../../src/Layout/AppNav/VerticalNavWrapper"
@@ -1605,7 +1605,7 @@ export default class MonthlyResult extends React.Component {
 //             let jumlahTentusah = 0;
 //             return (
 //                 <ReactCSSTransitionGroup
-//                     component="div"
+//                     componentPentadbiran="div"
 //                     transitionName="TabsAnimation"
 //                     transitionAppear={true}
 //                     transitionAppearTimeout={0}
@@ -1640,7 +1640,7 @@ export default class MonthlyResult extends React.Component {
 //                                 paperSize="A4"
 //                                 landscape={true}
 //                                 margin="1cm"
-//                                 ref={(component) => this.pdfExportComponent = component}
+//                                 ref={(componentPentadbiran) => this.pdfExportComponent = componentPentadbiran}
 //                             >
 //                                 <Row>
 //                                     <Col md={12}><b>Jadual 1.0 Laporan Bulanan Penentusahan Dan Penentusahan

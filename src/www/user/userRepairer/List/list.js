@@ -2,7 +2,7 @@ import React, {Fragment} from 'react';
 import ReactCSSTransitionGroup from "react-addons-css-transition-group";
 import PageTitle from "../../../../Layout/AppMain/PageTitle";
 import API from "../../../../utils/apiRepairer";
-import {repairerMenu} from "../../../../Layout/AppNav/VerticalNavWrapper"
+import {branchMenu, repairerMenu} from "../../../../Layout/AppNav/VerticalNavWrapper"
 import {
     Button,
     Card,
@@ -469,7 +469,52 @@ export default class ListForm extends React.Component {
                         <Col md="12">
                             <Card className="main-card mb-3">
                                 <CardBody>
+                                    <div>
+                                        <Button style={{width: '140px'}}
+                                                onClick={() => {
+                                                    this.props.history.push('/branch/register');
+                                                    setTimeout(function () {
+                                                        branchMenu.changeActiveLinkTo('#/branch/register');
+                                                    }.bind(this),);
+                                                }}
 
+                                                className="mb-2 mr-2 btn-icon btn-shadow btn-outline-2x" outline
+                                                color="success">
+                                            <i className="lnr-user btn-icon-wrapper"> </i>
+                                            Tambah
+                                        </Button>
+                                        <Button style={{width: '140px'}}
+                                                onClick={() => {
+                                                    this.setState({
+                                                        filtered: [],
+                                                        sorted: [{id: 'code', desc: true}],
+                                                        currentPage: 0,
+                                                        loading: true
+                                                    });
+
+                                                    let dataSelected = this.state.data;
+
+                                                    let isSelected = [];
+                                                    Object.keys(dataSelected).map(function (key, value) {
+                                                        isSelected.push(dataSelected[key]['id'])
+                                                    });
+                                                    for (let i = 0; i < isSelected.length; i++) {
+                                                        this.state.selected[isSelected[i]] = false;
+                                                    }
+                                                    this.state.selectAll = 0;
+                                                    this.fetchData({
+                                                        filtered: [],
+                                                        page: 0,
+                                                        pageSize: 10,
+                                                        sorted: [{id: 'code', desc: true}]
+                                                    });
+                                                }}
+                                                className="mb-2 mr-2 btn-icon btn-shadow btn-outline-2x" outline
+                                                color="info">
+                                            <i className="lnr-sync btn-icon-wrapper"> </i>
+                                            Refresh
+                                        </Button>
+                                    </div>
                                     <ReactTable
                                         data={data}
                                         filterable
@@ -496,31 +541,66 @@ export default class ListForm extends React.Component {
                                                     width: 50
                                                 },
                                                 {
-                                                    Header: 'Batch No.',
+                                                    Header: 'No. Pekerja',
+                                                    accessor: "batchNo",
+                                                    sortable: false,
+                                                    // filterable: false,
+                                                    width: 100
+                                                },
+                                                {
+                                                    Header: 'Nama',
                                                     accessor: "batchNo",
                                                     sortable: false,
                                                     // filterable: false,
                                                     width: 250
                                                 },
                                                 {
-                                                    Header: 'Tahun',
+                                                    Header: 'Jawatan Pentadbir',
                                                     accessor: 'year',
                                                     // filterable: false,
-                                                    width: 100
+                                                    width: 250
                                                 },
                                                 {
-                                                    Header: 'Bulan',
+                                                    Header: 'Jawatan & Gred',
                                                     accessor: 'month',
                                                     // filterable: false,
-                                                    width: 100
+                                                    width: 200
                                                 },
                                                 {
-                                                    Header: 'Cawangan',
+                                                    Header: 'Lantikan',
                                                     accessor: 'cawangan',
                                                     filterable: false,
-                                                    width: 200
+                                                    width: 100
                                                 }, {
-                                                    Header: 'Nama Proses',
+                                                    Header: 'Jawatan Generik',
+                                                    accessor: 'processName',
+                                                    width: 200,
+                                                    sortable: false,
+                                                    filterable: false,
+
+                                                },{
+                                                    Header: 'Tarikh Mula',
+                                                    accessor: 'processName',
+                                                    width: 200,
+                                                    sortable: false,
+                                                    filterable: false,
+
+                                                },{
+                                                    Header: 'Tarikh Akhir',
+                                                    accessor: 'processName',
+                                                    width: 200,
+                                                    sortable: false,
+                                                    filterable: false,
+
+                                                },{
+                                                    Header: 'Elaun',
+                                                    accessor: 'processName',
+                                                    width: 200,
+                                                    sortable: false,
+                                                    filterable: false,
+
+                                                },{
+                                                    Header: 'No. Rujukan',
                                                     accessor: 'processName',
                                                     width: 200,
                                                     sortable: false,
@@ -635,7 +715,6 @@ export default class ListForm extends React.Component {
                         </Col>
                     </Row>
                 </ReactCSSTransitionGroup>
-
             </Fragment>
         );
     }

@@ -1,8 +1,9 @@
 import React, {Fragment} from 'react';
 import ReactCSSTransitionGroup from "react-addons-css-transition-group";
 import PageTitle from "../../../Layout/AppMain/PageTitle";
-import API from "../../../utils/apiSetting";
-import {ownerMenu} from "../../../Layout/AppNav/VerticalNavWrapper"
+import API from "../../../utils/apiSystemSetting";
+// import API from "../../../utils/apiSetting";
+// import { settingMenu} from "../../../../Layout/AppNav/VerticalNavWrapper"; //loading effect
 import {
     Button,
     Card,
@@ -148,7 +149,6 @@ export default class ListForm extends React.Component {
             currentPage: this.state.currentPage + 1 /*page sekarang jump*/ >= result.count /*page total*/ ? (result.count <= 0 ? 0 : result.count - 1) : this.state.currentPage,
             loading: false,
         });
-
     };
 
     fetchData = (state, instance) => {
@@ -170,7 +170,6 @@ export default class ListForm extends React.Component {
             if (state.filtered[x].id === 'address') {
                 address = state.filtered[x].value
             }
-
         }
         setTimeout(function () {
                 this.setState({
