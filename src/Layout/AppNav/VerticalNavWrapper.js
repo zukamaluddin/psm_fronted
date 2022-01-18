@@ -23,26 +23,15 @@ export let reportMenu;
 export let settingMenu;
 
 class Nav extends Component {
-
     state = {};
-
     toggleMobileSidebar = () => {
         let {enableMobileMenu, setEnableMobileMenu} = this.props;
         setEnableMobileMenu(!enableMobileMenu);
     };
 
-
     render() {
         return (
             <Fragment>
-                {/*{*/}
-                {/*    localStorage.getItem('position') !== 'KPDNHEP' ?*/}
-                {/*        <MetisMenu content={userOwnerNav} onSelected={this.toggleMobileSidebar} activeLinkFromLocation*/}
-                {/*                   className="vertical-nav-menu" iconNamePrefix="" ref={(r) => {*/}
-                {/*            ownerMenu = r;*/}
-                {/*        }} classNameStateIcon="pe-7s-angle-down"/> : null*/}
-                {/*}*/}
-
                 <MetisMenu content={ DashboardNav} onSelected={this.toggleMobileSidebar} activeLinkFromLocation
                            className="vertical-nav-menu" iconNamePrefix="" ref={(r) => {
                     repairerMenu = r;
@@ -51,25 +40,21 @@ class Nav extends Component {
                            className="vertical-nav-menu" iconNamePrefix="" ref={(r) => {
                     repairerMenu = r;
                 }} classNameStateIcon="pe-7s-angle-down"/>
-
                 <MetisMenu content={UserManagement} onSelected={this.toggleMobileSidebar} activeLinkFromLocation
                            className="vertical-nav-menu" iconNamePrefix="" classNameStateIcon="pe-7s-angle-down"
                            ref={(r) => {
                                umMenu = r;
-                           }}
-                />
+                           }}/>
                 <MetisMenu content={Branch} onSelected={this.toggleMobileSidebar} activeLinkFromLocation
                            className="vertical-nav-menu" iconNamePrefix="" classNameStateIcon="pe-7s-angle-down"
                            ref={(r) => {
                                branchMenu = r;
-                           }}
-                />
+                           }}/>
                 <MetisMenu content={SettingNav} onSelected={this.toggleMobileSidebar} activeLinkFromLocation
                            className="vertical-nav-menu" iconNamePrefix="" classNameStateIcon="pe-7s-angle-down"
                            ref={(r) => {
                                settingMenu = r;
-                           }}
-                />
+                           }}/>
             </Fragment>
         );
     }
@@ -84,8 +69,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-
     setEnableMobileMenu: enable => dispatch(setEnableMobileMenu(enable)),
-
 });
+
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Nav));

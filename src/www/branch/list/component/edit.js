@@ -14,8 +14,6 @@ import {Bounce, toast} from "react-toastify";
 import moment from "moment";
 import DatePicker from "react-datepicker/es";
 
-export const allState = ['Pekan, Pahang', 'Kulim, Kedah', 'Padang Besar, Perlis'];
-
 export const allStatus = ['Baru', 'Dalam Progres', 'Selesai'];
 
 export default class EditModal extends React.Component {
@@ -45,8 +43,8 @@ export default class EditModal extends React.Component {
             id: id,
             title: this.state.modalData.title,
             status: this.state.modalData.status,
-            dateStart: moment(this.state.modalData.dateStart).format('D/M/YYYY'),
-            dateEnd: moment(this.state.modalData.dateEnd).format('D/M/YYYY'),
+            dateStart: this.state.modalData.dateStart,
+            dateEnd: this.state.modalData.dateEnd,
             description: this.state.modalData.description,
             report: this.state.modalData.report,
         };
@@ -151,8 +149,9 @@ export default class EditModal extends React.Component {
                                                name={'title'}
                                                value={this.state.modalData.dateStart}
                                                onChange={(dataEl) => {
-                                                   this.state.modalData.dateStart = dataEl.target.value;
-                                                   this.setState({dateStart: dataEl.target.value});
+                                                   console.log(dataEl)
+                                                   this.state.modalData.dateStart = moment(dataEl).format('D/M/YYYY');
+                                                   this.setState({modalData: this.state.modalData});
                                                }} dateFormat="d/M/yyyy"/>
                                         <FormFeedback>Required.</FormFeedback>
                                     </FormGroup>
@@ -164,8 +163,8 @@ export default class EditModal extends React.Component {
                                                     name={'title'}
                                                     value={this.state.modalData.dateEnd}
                                                     onChange={(dataEl) => {
-                                                        this.state.modalData.dateEnd = dataEl.target.value;
-                                                        this.setState({dateEnd: dataEl.target.value});
+                                                        this.state.modalData.dateEnd = moment(dataEl).format('D/M/YYYY');
+                                                        this.setState({modalData: this.state.modalData});
                                                     }} dateFormat="d/M/yyyy"/>
                                     </FormGroup>
                                 </Col>

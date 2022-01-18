@@ -1,6 +1,6 @@
 import React, {Fragment} from 'react';
 import Select from 'react-select';
-// import MultiSelect from "react-multi-select-componentPentadbiran";
+// import MultiSelect from "react-multi-select-component";
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import {Button, Card, CardBody, Col, Container, Form, FormGroup, Input, Label, Row,
     InputGroupAddon,

@@ -4,8 +4,6 @@ import cx from 'classnames';
 import {withRouter} from 'react-router-dom';
 
 import ResizeDetector from 'react-resize-detector';
-
-
 import AppMain from '../Layout/AppMain';
 
 class Main extends React.Component {
@@ -14,7 +12,6 @@ class Main extends React.Component {
         this.state = {
             closedSmallerSidebar: false
         };
-
     }
 
     render() {

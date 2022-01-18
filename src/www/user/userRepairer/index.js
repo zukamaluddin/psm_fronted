@@ -7,9 +7,8 @@ import AppFooter from '../../../Layout/AppFooter';
 
 
 import ThemeOptions from '../../../Layout/ThemeOptions';
-import RegisterForm from "./Form/register";
+import registerPentadbiran from "./register/main";
 import ListMember from "./List/list";
-
 
 const Forms = ({match}) => (
     <Fragment>
@@ -19,10 +18,8 @@ const Forms = ({match}) => (
             <AppSidebar/>
             <div className="app-main__outer">
                 <div className="app-main__inner">
-
-                    <Route path={`${match.url}/register`} component={RegisterForm}/>
+                    <Route path={`${match.url}/register`} component={registerPentadbiran}/>
                     <Route path={`${match.url}/list`} component={ListMember}/>
-
                 </div>
                 <AppFooter/>
             </div>

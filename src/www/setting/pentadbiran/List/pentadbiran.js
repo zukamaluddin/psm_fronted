@@ -10,12 +10,12 @@ import ReactTable from "react-table";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faTrashAlt, faEye} from "@fortawesome/free-solid-svg-icons";
 import Loader from 'react-loaders'
-import API from "../../utils/apiSystemSetting";
-import DeleteModal from "./componentPentadbiran/delete";
-import EditModal from "./componentPentadbiran/edit";
+import API from "../../../../utils/apiSystemSetting";
+import DeleteModal from "../component/delete";
+import EditModal from "../component/edit";
 //
 // import {allState} from '../../register/components/create'
-import {settingMenu} from "../../Layout/AppNav/VerticalNavWrapper";
+import {settingMenu} from "../../../../Layout/AppNav/VerticalNavWrapper";
 
 export default class ListPentadbiran extends React.Component {
     selectedDataAssign = [];
@@ -129,62 +129,61 @@ export default class ListPentadbiran extends React.Component {
                         </Button>
                     </div>
                     <ReactTable
+                        onFetchData={(state, instance) => {
+                            this.setState({loading: true});
+                            this.fetchData(state, instance);
+                        }}
+
                         data={data}
                         filterable
                         loading={this.state.loading}
                         filtered={this.state.filtered}
+                        onFilteredChange={filtered => {
+                            this.setState({filtered});
+                        }}
                         columns={[{
                             columns: [
                                 {
-                                    Header: 'No.',
-                                    accessor: "",
-                                    Cell: ({original, index}) => {
-                                        let page = this.state.set.page + 1
-                                        let totalPerPage = page * this.state.set.pageSize
-                                        return (
-                                            <div style={{
-                                                textAlign: 'center',
-                                                width: '100%'
-                                            }}>{`${index + totalPerPage + 1 - this.state.set.pageSize}`}</div>
-                                        );
-                                    },
-                                    sortable: false,
-                                    filterable: false,
-                                    width: 50
-                                },
-                                {
                                     Header: 'Nama',
-                                    accessor: "name",
-                                    sortable: false,
-                                    // filterable: false,
-                                    width: 250
-                                },
-                                {
+                                    accessor: 'name',
+                                    // width: 200,
+                                    Cell: row => <div style={{ textAlign: "center",width:'100%'}}>{row.value}</div>,
+                                },{
                                     Header: 'Elaun',
-                                    accessor: 'elaun',
-                                    // filterable: false,
-                                    width: 100
+                                    accessor: 'elaun',width: 200,
+                                    filterable: false
                                 },{
                                     Header: 'Aksi',
                                     sortable: false,
                                     filterable: false,
-                                    width: 140,
+                                    width: 100,
                                     Cell: row => (
                                         <div
                                             className="widget-content-right widget-content-actions"
                                             style={{textAlign: 'center', width: '100%'}}>
-                                            <div>
-                                                <Button className="border-0 btn-transition"
-                                                        onClick={() => {
-                                                            this.setState({
-                                                                isDialogSubmitReportOpen: true,
-                                                                selectedValue: row.original.id,
-                                                            })
-                                                        }} outline
-                                                        color="success">
-                                                    <FontAwesomeIcon icon={faEye}/>
-                                                </Button>
-                                            </div>
+                                            <Button className="border-0 btn-transition"
+                                                    onClick={() => {
+                                                        this.editModal.current.showModalEdit(row);
+                                                    }}
+                                                    outline
+                                                    color="success">
+                                                <FontAwesomeIcon icon={faEye}/>
+                                            </Button>
+                                            <Button
+                                                className="border-0 btn-transition"
+                                                onClick={() => {
+                                                    this.deleteModal.current.showModalDelete(row);
+                                                }}
+                                                outline
+                                                color="danger">
+                                                {
+                                                    <FontAwesomeIcon
+                                                        disabled={global.global_id === row.original.created_id}
+                                                        icon={faTrashAlt}/>
+                                                }
+                                            </Button>
+                                            <EditModal ref={this.editModal} getdata={this.fetchData}/>
+                                            <DeleteModal ref={this.deleteModal} getdata={this.fetchData}/>
                                         </div>
                                     )
                                 }
@@ -202,51 +201,14 @@ export default class ListPentadbiran extends React.Component {
                         rowsText="baris"
                         ofText="daripada"
                         pageText="Muka"
+                        onPageChange={(data) => {
+                            this.setState({currentPage: data})
+                        }}
                         pages={this.state.totalpagenum} // Display the total number of pages
                         minRows={0}
                         sorted={this.state.sorted}
-                        onPageSizeChange={(data) => {
-                            this.setState({
-                                pageSize: data,
-                                loading: true,
-                            }, this.fetchData({
-                                filtered: this.state.filtered,
-                                page: this.state.page,
-                                pageSize: data,
-                                sorted: this.state.sorted
-                            }));
-                        }}
-                        onPageChange={(data) => {
-                            this.setState({
-                                page: data,
-                                loading: true,
-                            }, this.fetchData({
-                                filtered: this.state.filtered,
-                                page: data,
-                                pageSize: this.state.pageSize,
-                                sorted: this.state.sorted
-                            }));
-                        }}
-                        onFilteredChange={filtered => {
-                            this.setState({filtered, loading: true});
-                            if (this.timeout) clearTimeout(this.timeout);
-                            this.timeout = setTimeout(() => {
-                                this.fetchData({
-                                    filtered: filtered,
-                                    page: this.state.page,
-                                    pageSize: this.state.pageSize,
-                                    sorted: this.state.sorted
-                                });
-                            }, 700);
-                        }}
                         onSortedChange={(newSort) => {
-                            this.setState({sorted: newSort, loading: true},
-                                this.fetchData({
-                                    filtered: this.state.filtered,
-                                    page: this.state.page,
-                                    pageSize: this.state.pageSize,
-                                    sorted: newSort
-                                }));
+                            this.setState({sorted: newSort});
                         }}
                     />
                 </CardBody>

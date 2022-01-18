@@ -32,19 +32,11 @@ export const MainNav = [
     },
 ];
 
-// export const userOwnerNav = userOwnerAccess()
-
 export const userRepairerNav = [
     {
         icon: 'pe-7s-tools',
         label: 'Lantikan',
-        // add: true,
-        // delete: true,
-        // update: true,
-        content: [{
-                label: 'Senarai',
-                to: '#/repairer/list',
-            }]
+        to: '#/repairer/list',
     }
 ]
 
@@ -75,9 +67,6 @@ export const lantikanNav = [
     {
         icon: 'pe-7s-tools',
         label: 'Lantikan',
-        // add: true,
-        // delete: true,
-        // update: true,
         content: [{
             label: 'Senarai',
             to: '#/lantikan/list',
@@ -113,39 +102,3 @@ export const UserManagement = [
         to: '#/user/list'
     }
 ];
-
-
-// let settingContent = function () {
-//     // if (localStorage.getItem('position') === "HQ") {
-//     //     return [
-//     //         {
-//     //             icon: 'pe-7s-news-paper',
-//     //             label: 'Tetapan',
-//     //             content: [
-//     //                 {
-//     //                     label: 'Caj Tentusah',
-//     //                     to: '#/setting/Caj',
-//     //                 },
-//     //                 // {
-//     //                 //     label: 'Senarai Harga',
-//     //                 //     to: '#/setting/list',
-//     //                 // },
-//
-//     //             ]
-//     //         }];
-//     // }
-//     return [
-//         {
-//             icon: 'pe-7s-news-paper',
-//             label: 'Tetapan',
-//             content: [
-//                 {
-//                     label: 'Caj Tentusah',
-//                     to: '#/setting/Caj',
-//                 },
-//             ]
-//         }];
-// };
-
-// export const SettingNav = settingContent();
-

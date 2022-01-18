@@ -23,10 +23,10 @@ export default {
         });
     },
 
-    list: (data, prop) => {
+    getUser: (data, prop) => {
         return new Promise((resolve, reject) => {
 
-            fetch(`${global.ipServer}laporan/list/${global.global_id}`, {
+            fetch(`${global.ipServer}lantikan/getUser`, {
                 method: 'POST',
                 body: data,
                 headers: {
@@ -42,13 +42,55 @@ export default {
                 .then((result) => {
                     return resolve(result)
                 })
+        });
+    },
 
+    getPentadbiran: (data, prop) => {
+        return new Promise((resolve, reject) => {
+
+            fetch(`${global.ipServer}setting/getUser`, {
+                method: 'POST',
+                body: data,
+                headers: {
+                    'x-access-token': global.token
+                },
+            })
+                .then((response) => {
+                    if (response.status === 200) {
+                        return response.json();
+                    }
+                    // return response.json()
+                })
+                .then((result) => {
+                    return resolve(result)
+                })
+        });
+    },
+
+    list: (data, prop) => {
+        return new Promise((resolve, reject) => {
+
+            fetch(`${global.ipServer}lantikan/listLantikan`, {
+                method: 'POST',
+                body: data,
+                headers: {
+                    'x-access-token': global.token
+                },
+            })
+                .then((response) => {
+                    if (response.status === 200) {
+                        return response.json();
+                    }
+                    // return response.json()
+                })
+                .then((result) => {
+                    return resolve(result)
+                })
         });
     },
 
     view: (data, prop) => {
         return new Promise((resolve, reject) => {
-
             fetch(`${global.ipServer}laporan/view/${global.global_id}/${data}`, {
                 method: 'POST',
                 headers: {
@@ -64,7 +106,40 @@ export default {
                 .then((result) => {
                     return resolve(result)
                 })
+        });
+    },
 
+    deleteLantikan: (data) => {
+        return new Promise((resolve, reject) => {
+            fetch(global.ipServer + `lantikan/delete`, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'x-access-token': global.token
+                },
+                body: JSON.stringify({data: data}),
+            })
+                .then((response) => response.json())
+                .then((result) => {
+                    return resolve(result)
+                })
+        });
+    },
+
+    viewLantikan: (rowid) => {
+        return new Promise((resolve, reject) => {
+
+            fetch(global.ipServer + "lantikan/view/" + rowid, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'x-access-token': global.token
+                }
+            })
+                .then((response) => response.json())
+                .then((result) => {
+                    return resolve(result)
+                })
         });
     },
 
@@ -110,8 +185,6 @@ export default {
                 .then((result) => {
                     return resolve(result)
                 })
-
         });
     },
-
 }

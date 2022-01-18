@@ -23,19 +23,21 @@ import ReactTable from "react-table";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {DropdownList} from "react-widgets";
 import {Bounce, toast} from "react-toastify";
-import {faEye, faFingerprint, faTrashAlt} from "@fortawesome/free-solid-svg-icons";
+import {faEye, faFingerprint, faTrashAlt, faFilePdf} from "@fortawesome/free-solid-svg-icons";
 // import {userRepairerAccess} from "../../../../Layout/AppNav/acessLevel";
 import TextareaAutosize from 'react-textarea-autosize';
 import PDFExport from "@progress/kendo-react-pdf/dist/npm/PDFExport";
 import styled, {keyframes} from "styled-components";
 import {tada} from "react-animations";
-import DialogEditView from "./edit";
+import DeleteModal from "../component/delete";
+import EditModal from "../component/edit";
+// import DeleteModal from "../component/delete";
+// import DeleteModal from "../../../branch/list/component/delete";
+
 const tadaAnimation = keyframes`${tada}`;
 const AnimationDiv = styled.div`
   animation: infinite 1s ${tadaAnimation};
 `;
-const jsonData = require('../../../../Reference/alamat.json');
-
 
 const initialState = {
     isDialogSubmitReportOpen: false,
@@ -55,19 +57,16 @@ const initialState = {
     showPdf: false,
     selectAll: 0,
     checkStatusFlag: [],
-    validPhoneAPI: false,
-    validEmailAPI: false,
-    modalProfile: false,
-    modalDeleteAll: false,
-    validPekerjaanPendapatan: false, src: '',
-    name: '',
-    noRocRob: '',
-    streetAddressNo: '',
-    placeArea: '',
-    stateSelected: '',
-    districtSelected: '',
-    agencySelected: '',
-
+    staffName: '',
+    staffId: '',
+    dateAssigned: '',
+    dateStart: '',
+    dateEnd: '',
+    jawatanPentadbiran: '',
+    jawatanGenerik: '',
+    description: '',
+    updatedBy: '',
+    createdBy: '',
 }
 
 const initialValid = {
@@ -77,17 +76,16 @@ const initialValid = {
     placeAreaValid: false,
     stateSelectedValid: false,
     districtSelectedValid: false,
-
 }
+
 export default class ListForm extends React.Component {
     selectedDataAssign = [];
-
     constructor(props) {
         super(props);
         this.state = initialState;
-
         this.refReactTable = React.createRef();
-
+        this.deleteModal = React.createRef();
+        this.editModal = React.createRef();
         // userRepairerAccess().length < 1 && this.props.history.push('/owner/list');
     }
 
@@ -109,17 +107,14 @@ export default class ListForm extends React.Component {
                     Anda pasti untuk hapus data ini ?
                 </ModalBody>
                 <ModalFooter>
-
                     <Button style={{width: '90px'}} color="success"
                             className='mb-2 mr-2 btn-icon btn-shadow btn-outline-2x' outline
                             onClick={this.deleteUser.bind(this, id)}><i
                         className="lnr-checkmark-circle btn-icon-wrapper"> </i>Ya</Button>
-
                     <Button style={{width: '90px'}} color="danger"
                             className='mb-2 mr-2 btn-icon btn-shadow btn-outline-2x'
                             outline onClick={this.hideModalDelete}> <i
                         className="lnr-cross-circle btn-icon-wrapper"> </i> Tidak</Button>
-
                 </ModalFooter>
             </Modal>
         );
@@ -127,7 +122,6 @@ export default class ListForm extends React.Component {
 
 
     deleteUser = async (event) => {
-
         this.selectedDataAssign = [event.original.id];
         this.hideModalDelete()
         let result = await API.delete(event.original.id, this.props);
@@ -152,12 +146,10 @@ export default class ListForm extends React.Component {
         }
     };
 
-
     loadData = async () => {
         let formData = new FormData();
         formData.append('data', JSON.stringify(this.state.set));
         let result = await API.list(formData, this.props);
-
         this.setState({
             data: result.data,
             // data_pdf: result_pdf.data,
@@ -165,17 +157,14 @@ export default class ListForm extends React.Component {
             currentPage: 0,
             loading: false,
         });
-
     };
 
     fetchData = (state, instance) => {
-
         let batchNo = '';
         let year = '';
         let month = '';
         let cawangan = '';
         for (var x in state.filtered) {
-
             if (state.filtered[x].id === 'batchNo') {
                 batchNo = state.filtered[x].value
             }
@@ -188,7 +177,6 @@ export default class ListForm extends React.Component {
             if (state.filtered[x].id === 'cawangan') {
                 cawangan = state.filtered[x].value
             }
-
         }
 
         setTimeout(function () {
@@ -208,6 +196,7 @@ export default class ListForm extends React.Component {
             }.bind(this),
         );
     }
+
     showModalDelete = (index) => {
         this.setState({activeModal: index.original.id})
     }
@@ -215,6 +204,7 @@ export default class ListForm extends React.Component {
     hideModalDelete = () => {
         this.setState({activeModal: null})
     }
+
     updateAPI = async () => {
         if (this.validate() && !this.state.noRocRobExist) {
             this.state.checkStatusFlag.push(this.state.id);
@@ -230,7 +220,6 @@ export default class ListForm extends React.Component {
             };
             const formData = new FormData();
             formData.append('data', JSON.stringify(data));
-
             await API.updateAPI(formData, this.state.id, this.props).then((result) => {
                 if (result.status === "OK") {
                     this.notify2();
@@ -246,8 +235,6 @@ export default class ListForm extends React.Component {
                         type: 'warning'
                     });
                 }
-
-
             });
         } else {
             toast("No. R.O.C /R.O.B. telah wujud", {
@@ -260,7 +247,6 @@ export default class ListForm extends React.Component {
         }
     };
 
-
     notify2 = () => this.toastId = toast("Berjaya dikemaskini.", {
         transition: Bounce,
         closeButton: true,
@@ -268,16 +254,12 @@ export default class ListForm extends React.Component {
         position: 'top-right',
         type: 'success'
     });
-    validate = () => {
-        this.setState(initialValid);
 
+    validate = () => {
         let checkValid = true
         if (!this.state.name) {
             checkValid = this.toggle('name')
         }
-        // if (!this.state.noRocRob) {
-        //     checkValid = this.toggle('noRocRob')
-        // }
         if (!this.state.address) {
             checkValid = this.toggle('address');
         }
@@ -287,13 +269,13 @@ export default class ListForm extends React.Component {
         return checkValid;
     };
 
-
     toggle = name => {
         this.setState({
             [`${name}Valid`]: true
         });
         return false;
     };
+
     handleChange = event => {
         if (event.target.name === 'noRocRob') {
             this.onValidRocAPI(event)
@@ -302,14 +284,14 @@ export default class ListForm extends React.Component {
             [event.target.name]: event.target.value,
             [`${event.target.name}Valid`]: false
         })
-
     };
+
     onValidRocAPI = async (event) => {
         await API.checkROC(event.target.value, this.props, this.state.id).then((status) => {
             this.setState({noRocRobExist: status})
-
         });
     }
+
     openmodalDeleteAll = () => {
         if (this.selectedDataAssign.length === 0) {
             toast("Tiada rekod yang akan dipadamkan.", {
@@ -319,12 +301,9 @@ export default class ListForm extends React.Component {
                 position: 'top-right',
                 type: 'warning'
             })
-
         } else {
             this.toggleModalDeleteAll();
         }
-
-
     };
 
     toggleModalDeleteAll = (event) => {
@@ -332,7 +311,6 @@ export default class ListForm extends React.Component {
     }
 
     deleteUserAll = async (event) => {
-
         this.toggleModalDeleteAll()
         let result = await API.delete(this.selectedDataAssign, this.props);
         if (result.status === 'OK') {
@@ -378,11 +356,9 @@ export default class ListForm extends React.Component {
         this.setState({
             modalProfile: !this.state.modalProfile
         });
-
     }
 
     onKeyPress(event) {
-
         const keyCode = event.keyCode || event.which;
         const keyValue = String.fromCharCode(keyCode);
         if (keyValue === " ")
@@ -395,7 +371,6 @@ export default class ListForm extends React.Component {
 
 
     toggleRow = (row) => {
-
         const newSelected = Object.assign({}, this.state.selected);
         newSelected[row] = !this.state.selected[row];
         if (newSelected[row] === false) {
@@ -403,13 +378,10 @@ export default class ListForm extends React.Component {
             if (index > -1) {
                 this.selectedDataAssign.splice(index, 1);
             }
-
         }
         if (newSelected[row] === true) {
             this.selectedDataAssign.push(row)
-
         }
-
         if (Object.values(newSelected).includes(true)) {
             this.setState({
                 selected: newSelected,
@@ -421,7 +393,6 @@ export default class ListForm extends React.Component {
                 selectAll: 0
             });
         }
-
     }
 
     onKeyNo = (event) => {
@@ -435,7 +406,6 @@ export default class ListForm extends React.Component {
             else if (/\.+|-/.test(keyValue))
                 event.preventDefault();
         }
-
     }
 
     render() {
@@ -444,16 +414,8 @@ export default class ListForm extends React.Component {
 
         return (
             <Fragment>
-                {this.state.isDialogSubmitReportOpen &&
-                <DialogEditView datas={this.state.selectedValue} isOpen={true} onClose={() => {
-                    this.setState({
-                        isDialogSubmitReportOpen: false
-                    })
-                }}/>
-                }
                 <ReactCSSTransitionGroup
                     component="div"
-
                     transitionName="TabsAnimation"
                     transitionAppear={true}
                     transitionAppearTimeout={0}
@@ -472,9 +434,9 @@ export default class ListForm extends React.Component {
                                     <div>
                                         <Button style={{width: '140px'}}
                                                 onClick={() => {
-                                                    this.props.history.push('/branch/register');
+                                                    this.props.history.push('/repairer/register');
                                                     setTimeout(function () {
-                                                        branchMenu.changeActiveLinkTo('#/branch/register');
+                                                        repairerMenu.changeActiveLinkTo('#/repairer/register');
                                                     }.bind(this),);
                                                 }}
 
@@ -541,86 +503,65 @@ export default class ListForm extends React.Component {
                                                     width: 50
                                                 },
                                                 {
-                                                    Header: 'No. Pekerja',
-                                                    accessor: "batchNo",
-                                                    sortable: false,
-                                                    // filterable: false,
-                                                    width: 100
-                                                },
-                                                {
-                                                    Header: 'Nama',
-                                                    accessor: "batchNo",
+                                                    Header: 'Nama Staf',
+                                                    accessor: "staffName",
                                                     sortable: false,
                                                     // filterable: false,
                                                     width: 250
                                                 },
                                                 {
-                                                    Header: 'Jawatan Pentadbir',
-                                                    accessor: 'year',
+                                                    Header: 'ID Staf',
+                                                    accessor: 'staffId',
                                                     // filterable: false,
-                                                    width: 250
+                                                    // width: 250
                                                 },
                                                 {
-                                                    Header: 'Jawatan & Gred',
-                                                    accessor: 'month',
+                                                    Header: 'Tarikh Lantikan',
+                                                    accessor: 'dateAssigned',
                                                     // filterable: false,
-                                                    width: 200
+                                                    // width: 200
                                                 },
                                                 {
-                                                    Header: 'Lantikan',
-                                                    accessor: 'cawangan',
-                                                    filterable: false,
-                                                    width: 100
-                                                }, {
-                                                    Header: 'Jawatan Generik',
-                                                    accessor: 'processName',
-                                                    width: 200,
-                                                    sortable: false,
-                                                    filterable: false,
-
-                                                },{
                                                     Header: 'Tarikh Mula',
-                                                    accessor: 'processName',
-                                                    width: 200,
-                                                    sortable: false,
-                                                    filterable: false,
-
-                                                },{
-                                                    Header: 'Tarikh Akhir',
-                                                    accessor: 'processName',
-                                                    width: 200,
-                                                    sortable: false,
-                                                    filterable: false,
-
-                                                },{
-                                                    Header: 'Elaun',
-                                                    accessor: 'processName',
-                                                    width: 200,
-                                                    sortable: false,
-                                                    filterable: false,
-
-                                                },{
-                                                    Header: 'No. Rujukan',
-                                                    accessor: 'processName',
-                                                    width: 200,
-                                                    sortable: false,
-                                                    filterable: false,
-
-                                                },{
-                                                    Header: 'Status',
-                                                    accessor: 'isFinish',
-                                                    sortable: false,
-                                                    filterable: false,
-                                                    width: 120,
-                                                    Cell: ({original}) => {
-                                                        if (original.isFinish === false) {
-                                                            return (<div className="badge badge-success ml-2">Sedang aktif</div>)
-                                                        } else {
-                                                            return (<div className="badge badge-secondary ml-2">Proses Siap</div>)
-                                                        }
-                                                    },
-
+                                                    accessor: 'dateStart',
+                                                    // filterable: false,
+                                                    // width: 100
                                                 }, {
+                                                    Header: 'Tarikh Akhir',
+                                                    accessor: 'dateEnd',
+                                                    // width: 200,
+                                                    // sortable: false,
+                                                    // filterable: false,
+
+                                                },{
+                                                    Header: 'Jawatan Pentadbiran',
+                                                    accessor: 'jawatanPentadbiran',
+                                                    width: 200,
+                                                    sortable: false,
+                                                    // filterable: false,
+
+                                                },{
+                                                    Header: 'Jawatan Gred',
+                                                    accessor: 'jawatanGred',
+                                                    // width: 200,
+                                                    sortable: false,
+                                                    // filterable: false,
+
+                                                },{
+                                                    Header: 'Lantikan',
+                                                    accessor: 'jawatanLantikan',
+                                                    // width: 200,
+                                                    sortable: false,
+                                                    // filterable: false,
+
+                                                },{
+                                                    Header: 'Jawatan Generik',
+                                                    accessor: 'jawatanGenerik',
+                                                    width: 200,
+                                                    sortable: false,
+                                                    // filterable: false,
+
+                                                },{
                                                     Header: 'Aksi',
                                                     sortable: false,
                                                     filterable: false,
@@ -630,16 +571,48 @@ export default class ListForm extends React.Component {
                                                             className="widget-content-right widget-content-actions"
                                                             style={{textAlign: 'center', width: '100%'}}>
                                                             <div>
+                                                                {/*<Button className="border-0 btn-transition"*/}
+                                                                {/*        onClick={() => {*/}
+                                                                {/*            this.setState({*/}
+                                                                {/*                isDialogSubmitReportOpen: true,*/}
+                                                                {/*                selectedValue: row.original.id,*/}
+                                                                {/*            })*/}
+                                                                {/*        }} outline*/}
+                                                                {/*        color="success">*/}
+                                                                {/*    <FontAwesomeIcon icon={faEye}/>*/}
+                                                                {/*</Button>*/}
                                                                 <Button className="border-0 btn-transition"
                                                                         onClick={() => {
-                                                                            this.setState({
-                                                                                isDialogSubmitReportOpen: true,
-                                                                                selectedValue: row.original.id,
-                                                                            })
-                                                                        }} outline
+                                                                            this.editModal.current.showModalEdit(row);
+                                                                        }}
+                                                                        outline
                                                                         color="success">
                                                                     <FontAwesomeIcon icon={faEye}/>
                                                                 </Button>
+                                                                <Button className="border-0 btn-transition"
+                                                                        onClick={() => {
+                                                                            this.editModal.current.showModalEdit(row);
+                                                                        }}
+                                                                        outline
+                                                                        color="normal">
+                                                                    <FontAwesomeIcon icon={faFilePdf}/>
+                                                                </Button>
+                                                                <Button
+                                                                    className="border-0 btn-transition"
+                                                                    onClick={() => {
+                                                                        this.deleteModal.current.showModalDelete(row);
+                                                                    }}
+                                                                    outline
+                                                                    color="danger">
+                                                                    {
+                                                                        <FontAwesomeIcon
+                                                                            disabled={global.global_id === row.original.created_id}
+                                                                            icon={faTrashAlt}/>
+
+                                                                    }
+                                                                </Button>
+                                                                <EditModal ref={this.editModal} getdata={this.fetchData}/>
+                                                                <DeleteModal ref={this.deleteModal} getdata={this.fetchData}/>
                                                             </div>
                                                         </div>
                                                     )

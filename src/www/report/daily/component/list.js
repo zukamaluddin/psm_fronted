@@ -1567,7 +1567,7 @@ export default class DailyResult extends React.Component {
 //
 //         return (
 //             <ReactCSSTransitionGroup
-//                 componentPentadbiran="div"
+//                 component="div"
 //                 transitionName="TabsAnimation"
 //                 transitionAppear={true}
 //                 transitionAppearTimeout={0}
@@ -1606,7 +1606,7 @@ export default class DailyResult extends React.Component {
 //                             paperSize="A4"
 //                             landscape={true}
 //                             margin="1cm"
-//                             ref={(componentPentadbiran) => this.pdfExportComponent = componentPentadbiran}
+//                             ref={(component) => this.pdfExportComponent = component}
 //                         >
 //                             <Row>
 //                                 <Col md={12}><b>Jadual 1.0 Laporan Harian Penentusahan Dan Penentusahan Semula Peringkat
