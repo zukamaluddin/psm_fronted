@@ -265,7 +265,7 @@ export default class PdfModal extends React.Component {
                                             <br/>
                                             <span
                                                 style={headerNormal}> 2&ensp; Seting-tinggi penghargaan dan tahniah diucapkan di atas lantikan sebagai panel teknikal dalam membantu menyemak serta menilaiproposal UTMER 2021/1 di bawah
-                                                Niche Area SMART DIGITAL COMMUNITY.&nbspDiharapkan agar penilaian yang telah dibuat membantu meningkatkan kualiti proposal terutama dalam aspek teknologi yang berkaitan dan memastikan projek
+                                                Niche Area SMART DIGITAL COMMUNITY.&nbsp; Diharapkan agar penilaian yang telah dibuat membantu meningkatkan kualiti proposal terutama dalam aspek teknologi yang berkaitan dan memastikan projek
                                                 yang berkualiti sahaja yang terpilih.
                                             </span>
                                             <br/>
