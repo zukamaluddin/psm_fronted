@@ -32,10 +32,15 @@ class Nav extends Component {
     render() {
         return (
             <Fragment>
-                <MetisMenu content={DashboardNav} onSelected={this.toggleMobileSidebar} activeLinkFromLocation
-                           className="vertical-nav-menu" iconNamePrefix="" ref={(r) => {
-                    repairerMenu = r;
-                }} classNameStateIcon="pe-7s-angle-down"/>
+
+                {
+                    ["Staf", "Pentadbir"].includes(localStorage.getItem('position')) &&
+                    <MetisMenu content={DashboardNav} onSelected={this.toggleMobileSidebar} activeLinkFromLocation
+                               className="vertical-nav-menu" iconNamePrefix="" ref={(r) => {
+                        repairerMenu = r;
+                    }} classNameStateIcon="pe-7s-angle-down"/>
+                }
+
                 {
                     ["Staf", "Pentadbir"].includes(localStorage.getItem('position')) &&
                     <MetisMenu content={userRepairerNav} onSelected={this.toggleMobileSidebar} activeLinkFromLocation

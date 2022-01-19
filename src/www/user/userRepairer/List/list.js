@@ -31,6 +31,7 @@ import styled, {keyframes} from "styled-components";
 import {tada} from "react-animations";
 import DeleteModal from "../component/delete";
 import EditModal from "../component/edit";
+import PdfModal from "../component/epdf";
 // import DeleteModal from "../component/delete";
 // import DeleteModal from "../../../branch/list/component/delete";
 
@@ -86,6 +87,7 @@ export default class ListForm extends React.Component {
         this.refReactTable = React.createRef();
         this.deleteModal = React.createRef();
         this.editModal = React.createRef();
+        this.pdfModal = React.createRef();
         // userRepairerAccess().length < 1 && this.props.history.push('/owner/list');
     }
 
@@ -591,7 +593,7 @@ export default class ListForm extends React.Component {
                                                                 </Button>
                                                                 <Button className="border-0 btn-transition"
                                                                         onClick={() => {
-                                                                            this.editModal.current.showModalEdit(row);
+                                                                            this.pdfModal.current.showModalEdit(row);
                                                                         }}
                                                                         outline
                                                                         color="normal">
@@ -612,6 +614,7 @@ export default class ListForm extends React.Component {
                                                                     }
                                                                 </Button>
                                                                 <EditModal ref={this.editModal} getdata={this.fetchData}/>
+                                                                <PdfModal ref={this.pdfModal} getdata={this.fetchData}/>
                                                                 <DeleteModal ref={this.deleteModal} getdata={this.fetchData}/>
                                                             </div>
                                                         </div>
