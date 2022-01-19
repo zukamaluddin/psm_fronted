@@ -179,7 +179,7 @@ class UserBox extends React.Component {
 
     openModalAPI() {
         this.onResetState();
-        fetch(global.ipServer + 'user/view/' + global.global_id + '/' + global.global_id, {
+        fetch(global.ipServer + 'user/view/' + global.global_id , {
             headers: {
                 'x-access-token': global.token
             }
@@ -196,7 +196,6 @@ class UserBox extends React.Component {
                         defaultPhone: result.phone,
                         email: result.email,
                         status: result.status,
-                        branch: result.branch.code,
                         srcTemp: localStorage.getItem('picture'),
                     }
                 )

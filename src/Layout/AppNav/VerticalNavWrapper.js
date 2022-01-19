@@ -1,5 +1,5 @@
 import React, {Component, Fragment} from 'react';
-import {withRouter} from 'react-router-dom';
+import {Redirect, withRouter} from 'react-router-dom';
 import {connect} from 'react-redux';
 import MetisMenu from 'react-metismenu';
 import {setEnableMobileMenu} from '../../reducers/ThemeOptions';
@@ -32,29 +32,44 @@ class Nav extends Component {
     render() {
         return (
             <Fragment>
-                <MetisMenu content={ DashboardNav} onSelected={this.toggleMobileSidebar} activeLinkFromLocation
+                <MetisMenu content={DashboardNav} onSelected={this.toggleMobileSidebar} activeLinkFromLocation
                            className="vertical-nav-menu" iconNamePrefix="" ref={(r) => {
                     repairerMenu = r;
                 }} classNameStateIcon="pe-7s-angle-down"/>
-                <MetisMenu content={ userRepairerNav} onSelected={this.toggleMobileSidebar} activeLinkFromLocation
-                           className="vertical-nav-menu" iconNamePrefix="" ref={(r) => {
-                    repairerMenu = r;
-                }} classNameStateIcon="pe-7s-angle-down"/>
-                <MetisMenu content={UserManagement} onSelected={this.toggleMobileSidebar} activeLinkFromLocation
-                           className="vertical-nav-menu" iconNamePrefix="" classNameStateIcon="pe-7s-angle-down"
-                           ref={(r) => {
-                               umMenu = r;
-                           }}/>
-                <MetisMenu content={Branch} onSelected={this.toggleMobileSidebar} activeLinkFromLocation
-                           className="vertical-nav-menu" iconNamePrefix="" classNameStateIcon="pe-7s-angle-down"
-                           ref={(r) => {
-                               branchMenu = r;
-                           }}/>
-                <MetisMenu content={SettingNav} onSelected={this.toggleMobileSidebar} activeLinkFromLocation
-                           className="vertical-nav-menu" iconNamePrefix="" classNameStateIcon="pe-7s-angle-down"
-                           ref={(r) => {
-                               settingMenu = r;
-                           }}/>
+                {
+                    ["Staf", "Pentadbir"].includes(localStorage.getItem('position')) &&
+                    <MetisMenu content={userRepairerNav} onSelected={this.toggleMobileSidebar} activeLinkFromLocation
+                               className="vertical-nav-menu" iconNamePrefix="" ref={(r) => {
+                        repairerMenu = r;
+                    }} classNameStateIcon="pe-7s-angle-down"/>
+                }
+                {
+                    ["Staf", "Pentadbir"].includes(localStorage.getItem('position')) &&
+                    <MetisMenu content={Branch} onSelected={this.toggleMobileSidebar} activeLinkFromLocation
+                               className="vertical-nav-menu" iconNamePrefix="" classNameStateIcon="pe-7s-angle-down"
+                               ref={(r) => {
+                                   branchMenu = r;
+                               }}/>
+                }
+
+                {
+                    localStorage.getItem('position') === 'Admin' &&
+                    <MetisMenu content={UserManagement} onSelected={this.toggleMobileSidebar} activeLinkFromLocation
+                               className="vertical-nav-menu" iconNamePrefix="" classNameStateIcon="pe-7s-angle-down"
+                               ref={(r) => {
+                                   umMenu = r;
+                               }}/>
+                }
+
+                {
+                    ["Admin"].includes(localStorage.getItem('position')) &&
+                    <MetisMenu content={SettingNav} onSelected={this.toggleMobileSidebar} activeLinkFromLocation
+                               className="vertical-nav-menu" iconNamePrefix="" classNameStateIcon="pe-7s-angle-down"
+                               ref={(r) => {
+                                   settingMenu = r;
+                               }}/>
+                }
+
             </Fragment>
         );
     }

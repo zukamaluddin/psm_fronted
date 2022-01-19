@@ -1,7 +1,7 @@
 
 //------------------------------------------ Owner and Repairer----------------------------------------------------
-let admin = localStorage.getItem('position') === "HQ" || localStorage.getItem('position') === "Manager Cawangan" || localStorage.getItem('position') === "Manager Negeri";
-let staff = localStorage.getItem('position') === "Staf";
+// let admin = localStorage.getItem('position') === "HQ" || localStorage.getItem('position') === "Manager Cawangan" || localStorage.getItem('position') === "Manager Negeri";
+// let staff = localStorage.getItem('position') === "Staf";
 // export const userOwnerAccess = function () {
 //     if (admin) {
 //         return [

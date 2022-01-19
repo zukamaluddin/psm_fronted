@@ -228,7 +228,7 @@ export default class ListUser extends React.Component {
                                             umMenu.changeActiveLinkTo('#/user/register');
                                         }.bind(this),);
                                     }}
-                                    disabled={global.position != "HQ" ? true : false}
+                                    disabled={global.position != "Admin" ? true : false}
                                     className="mb-2 mr-2 btn-icon btn-shadow btn-outline-2x" outline
                                     color="success">
                                 <i className="lnr-user btn-icon-wrapper"> </i>

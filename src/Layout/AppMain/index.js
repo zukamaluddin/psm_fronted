@@ -35,6 +35,8 @@ export const fakeAuth = {
     signout(cb) {
         localStorage.clear()
         this.isAuthenticated = null
+
+
     }
 };
 
@@ -126,42 +128,18 @@ const AppMain = () => {
                     <Route path="/report" component={report}/>
                     <Route path="/setting" component={setting}/>
                     {
-                        localStorage.getItem('position') === 'HQ' ?
-                            <Route path="/user" component={userManagement}/> : <Route path="/user" component={Page401}/>
-                    }
-                    {
-                        localStorage.getItem('position') === 'HQ' ?
-                            <Redirect to={'/user/list'}/> :''
-                    }
-                    {/*{*/}
-                    {/*    localStorage.getItem('position') === 'KPDNHEP' ?*/}
-                    {/*        <Redirect to={'/report/serapan'}/> :''*/}
-                    {/*}*/}
-                    {/*{*/}
-                    {/*    localStorage.getItem('position') === 'Kerani Cawangan' ?*/}
-                    {/*        <Redirect to={'/report/daily'}/> :''*/}
-                    {/*}*/}
-                    {/*{*/}
-                    {/*    localStorage.getItem('position') === 'Staf' ?*/}
-                    {/*        <Redirect to={'/equipment/list'}/> :''*/}
-                    {/*}*/}
-                    {/*{*/}
-                    {/*    localStorage.getItem('position') === 'Manager Cawangan' ?*/}
-                    {/*        <Redirect to={'/equipment/list'}/> :''*/}
-                    {/*}*/}
-                    {/*{*/}
-                    {/*    localStorage.getItem('position') === 'Manager Negeri' ?*/}
-                    {/*        <Redirect to={'/equipment/list'}/> :''*/}
-                    {/*}*/}
-
-                    {
                         localStorage.getItem('user') ?
                             <Route path="/user" component={userManagement}/>:
                             <Route exact path="/login" component={Auth}/>
                     }
+                    {
+                        localStorage.getItem('position') === 'Admin' ?
+                            <Redirect to={'/user/list'}/> : <Redirect to={'/dashboard'}/>
+                    }
 
 
-                    {/*<Route component={Page404}/>*/}
+
+                    <Route component={Page404}/>
 
                 </Switch>
 
