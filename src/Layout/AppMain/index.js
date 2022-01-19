@@ -6,6 +6,7 @@ import {
     ToastContainer,
 } from 'react-toastify';
 import {Col} from "reactstrap";
+import dashboard from "../../www/Dashboard";
 
 const Auth = lazy(() => import('../../www/auth'));
 const userOwner = lazy(() => import('../../www/user/userOwner'));
@@ -116,6 +117,7 @@ const AppMain = () => {
                     <Route exact path="/forgot-password" component={Auth}/>
                     <Route exact path="/reset-password/:token" component={Auth}/>
                     <Route exact path="/register" component={Auth}/>
+                    <Route path="/dashboard" component={dashboard}/>
                     <Route path="/branch" component={branch}/>
                     <Route path="/owner" component={userOwner}/>
                     <Route path="/repairer" component={userRepairer}/>

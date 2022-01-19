@@ -3,6 +3,7 @@
 #idea
 .idea
 .idea/*
+*.xml
 
 # dependencies
 /node_modules

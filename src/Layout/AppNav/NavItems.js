@@ -82,7 +82,7 @@ export const DashboardNav = [
     {
         icon: 'pe-7s-graph2',
         label: 'Dashboard',
-        to: '#/dashboard/list',
+        to: '#/dashboard',
 
     }
 ]
