@@ -17,7 +17,7 @@ import {faPen} from "@fortawesome/free-solid-svg-icons";
 import {faTrashAlt} from "@fortawesome/fontawesome-free-solid";
 import {Bounce, toast} from "react-toastify";
 import {DropdownList} from "react-widgets";
-import { settingMenu} from "../../../../../Layout/AppNav/VerticalNavWrapper"; //loading effect
+import { repairerMenu} from "../../../../../Layout/AppNav/VerticalNavWrapper"; //loading effect
 
 import _ from 'lodash';
 import LaddaButton, {EXPAND_LEFT} from "react-ladda";
@@ -163,7 +163,7 @@ class CreateComp extends React.Component {
                             if (data['status'] === 'OK') {
                                 toast.success("Data berjaya disimpan");
                                 this.props.history.push(`/repairer/list`);
-                                settingMenu.changeActiveLinkTo('#/repairer/list')
+                                repairerMenu.changeActiveLinkTo('#/repairer/list')
                                 resolve('Ok');
                             } else {
                                 toast.error("Ralat");

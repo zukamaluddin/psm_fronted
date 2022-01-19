@@ -69,7 +69,7 @@ class CreateComp extends React.Component {
 
             return new Promise((resolve, reject) => {
 
-                fetch(global.ipServer + 'setting/createJawatanLantikan', {
+                fetch(global.ipServer + 'setting/createJawatanPentadbiran', {
                     method: 'POST',
                     body: formData,
                     headers: {
@@ -83,8 +83,8 @@ class CreateComp extends React.Component {
                             function () {
                                 if (data['status'] === 'OK') {
                                     toast.success("Data berjaya disimpan");
-                                    this.props.history.push(`/setting/lantikan`);
-                                    settingMenu.changeActiveLinkTo('#/setting/lantikan')
+                                    this.props.history.push(`/setting/pentadbiran`);
+                                    settingMenu.changeActiveLinkTo('#/setting/pentadbiran')
                                     resolve('Ok');
                                 } else {
                                     toast.error("Ralat");

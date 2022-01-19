@@ -23,7 +23,7 @@ class CreateMain extends React.Component {
                     transitionEnter={false}
                     transitionLeave={false}>
                     <PageTitle
-                        heading="Pendaftaran Tugasan"
+                        heading="Pendaftaran Jawatan"
                         // subheading="KARTU TANDA ANGGOTA NAHDLATUL ULAMA"
                         icon="pe-7s-culture icon-gradient bg-tempting-azure"
                     />
