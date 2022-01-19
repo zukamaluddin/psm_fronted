@@ -14,7 +14,7 @@ import {Bounce, toast} from "react-toastify";
 import moment from "moment";
 import DatePicker from "react-datepicker/es";
 
-export const allStatus = ['Baru', 'Dalam Progres', 'Selesai'];
+export const allStatus = ['Baru', 'Batal', 'Dalam Progres','Lebih Masa','Selesai',];
 
 export default class EditModal extends React.Component {
     constructor(props) {
@@ -103,7 +103,7 @@ export default class EditModal extends React.Component {
     render() {
         return (
             <Modal isOpen={this.state.activeModal} size='lg'>
-                <ModalHeader toggle={this.hideModalEdit}>Butiran Cawangan </ModalHeader>
+                <ModalHeader toggle={this.hideModalEdit}>Butiran Tugasan</ModalHeader>
                 <ModalBody>
                     <Container>
                         <div className="form-wizard-content">

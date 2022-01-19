@@ -19,7 +19,7 @@ import {faPen} from "@fortawesome/free-solid-svg-icons";
 import {faTrashAlt} from "@fortawesome/fontawesome-free-solid";
 import {toast} from "react-toastify";
 import {DropdownList} from "react-widgets";
-import { branchMenu} from "../../../../Layout/AppNav/VerticalNavWrapper"; //loading effect
+import {branchMenu} from "../../../../Layout/AppNav/VerticalNavWrapper"; //loading effect
 import _ from 'lodash';
 import API from "../../../../utils/apiBranch";
 import LaddaButton, {EXPAND_LEFT} from "react-ladda";
@@ -27,14 +27,14 @@ import moment from "moment";
 import DatePicker from "react-datepicker";
 
 export const allState = ['Pekan, Pahang', 'Kulim, Kedah', 'Padang Besar, Perlis'];
-export const allLantikan = ['Sekolah','SPACE','Fakulti','TNCPI'];
+export const allLantikan = ['Sekolah', 'SPACE', 'Fakulti', 'TNCPI'];
 export const allStatus = ['Aktif', 'Rosak', 'Baiki'];
 
 class CreateComp extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            validForm: {},branchCodeApi: null,
+            validForm: {}, branchCodeApi: null,
             dateStart: '',
             dateEnd: '',
         };
@@ -43,6 +43,7 @@ class CreateComp extends React.Component {
         this.validateBranchApi = _.debounce(this.validateBranchApi, 1000);
 
     }
+
     validateBranchApi = async (code) => {
 
         // if (code) {
@@ -69,51 +70,52 @@ class CreateComp extends React.Component {
 
         this.setState({validForm: copy}, function () {
 
-                let data = {
-                    title: this.state.title,
-                    dateStart: moment(this.state.dateStart).format('D/M/YYYY'),
-                    dateEnd: moment(this.state.dateEnd).format('D/M/YYYY'),
-                    description: this.state.description,
-                    status: this.state.selectedStatus,
-                };
-                const formData = new FormData();
-                formData.append('data', JSON.stringify(data));
+            let data = {
+                title: this.state.title,
+                dateStart: moment(this.state.dateStart).format('D/MM/YYYY'),
+                dateEnd: moment(this.state.dateEnd).format('D/MM/YYYY'),
+                description: this.state.description,
+                status: this.state.selectedStatus,
+                createdBy: global.global_id,
+            };
+            const formData = new FormData();
+            formData.append('data', JSON.stringify(data));
 
-                return new Promise((resolve, reject) => {
+            return new Promise((resolve, reject) => {
 
-                    fetch(global.ipServer + 'tugasan/create', {
-                        method: 'POST',
-                        body: formData,
-                        headers: {
-                            'x-access-token': global.token
-                        }
-                    })
-                        .then((response) => response.json())
-                        .then((data) => {
+                fetch(global.ipServer + 'tugasan/create', {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'x-access-token': global.token
+                    }
+                })
+                    .then((response) => response.json())
+                    .then((data) => {
 
-                            setTimeout(
-                                function () {
-                                    if (data['status'] === 'OK') {
-                                        toast.success("Data berjaya disimpan");
-                                        this.props.history.push(`/branch/list`);
-                                        branchMenu.changeActiveLinkTo('#/branch/list')
-                                        resolve('Ok');
-                                    } else {
-                                        toast.error("Ralat");
-                                        resolve('Failed');
-                                    }
+                        setTimeout(
+                            function () {
+                                if (data['status'] === 'OK') {
+                                    toast.success("Data berjaya disimpan");
+                                    this.props.history.push(`/branch/list`);
+                                    branchMenu.changeActiveLinkTo('#/branch/list')
+                                    resolve('Ok');
+                                } else {
+                                    toast.error("Ralat");
+                                    resolve('Failed');
                                 }
-                                    .bind(this),
-                                1000
-                            );
+                            }
+                                .bind(this),
+                            1000
+                        );
 
 
-                        })
-                        .catch((error) => {
-                            toast.error("Ralat");
-                            resolve('Failed');
-                        });
-                });
+                    })
+                    .catch((error) => {
+                        toast.error("Ralat");
+                        resolve('Failed');
+                    });
+            });
             // }else {
             //     toast.warn("Sila isi ruang yang wajib");
             // }
@@ -141,8 +143,12 @@ class CreateComp extends React.Component {
 
                                             <option key={''} value={''} disabled>Sila pilih</option>
                                             <option key={'Baru'} value={'Baru'}>Baru</option>
+                                            <option key={'Batal'} value={'Batal'}>Batal</option>
                                             <option key={'Dalam Progres'} value={'Dalam Progres'}>Dalam Progres</option>
+                                            <option key={'Lebih Masa'} value={'Lebih Masa'}>Lebih Masa</option>
                                             <option key={'Selesai'} value={'Selesai'}>Selesai</option>
+
+
                                         </Input>
                                     </FormGroup>
                                 </Col>
@@ -191,13 +197,13 @@ class CreateComp extends React.Component {
                                                }}
                                                placeholder="Taip di sini"/>
                                     </FormGroup>
-                                </Col>                
+                                </Col>
                             </Row>
                         </div>
                     </Container>
                 </CardBody>
                 <CardFooter>
-                    <Col style={{width:'100%'}}>
+                    <Col style={{width: '100%'}}>
                         <LaddaButton
                             className="mb-2 mr-2 btn btn-icon btn-shadow btn-outline-2x float-right btn-outline-primary"
                             // loading={this.state.expLeft}
