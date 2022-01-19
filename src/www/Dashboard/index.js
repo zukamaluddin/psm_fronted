@@ -22,7 +22,7 @@ const Home = ({ match }) => (
                         <CSSTransitionGroup component="div" transitionName="TabsAnimation" transitionAppear={true}
                             transitionAppearTimeout={0} transitionEnter={false} transitionLeave={false}>
 
-                            <PageTitle heading="Home" breadcrumbTitle="Home"
+                            <PageTitle heading="Dashboard" breadcrumbTitle="Dashboard"
                                 icon="pe-7s-graph3 icon-gradient bg-ripe-malin" />
 
 
