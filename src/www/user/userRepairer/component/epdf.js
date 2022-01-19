@@ -235,121 +235,6 @@ export default class PdfModal extends React.Component {
             <Modal isOpen={this.state.activeModal} size='lg'>
                 <ModalHeader toggle={this.hideModalEdit}>Butiran Perlantikkan </ModalHeader>
                 <ModalBody>
-                    {/*<Container>*/}
-                    {/*<div className="form-wizard-content">*/}
-                    {/*    <Row>*/}
-                    {/*        <Col md={12}>*/}
-                    {/*            <FormGroup>*/}
-                    {/*                <Label>Nama Staf</Label>*/}
-                    {/*                <Input type="text"*/}
-                    {/*                       name={'title'}*/}
-                    {/*                       value={this.state.modalData.staffName} readOnly*/}
-                    {/*                       placeholder="Taip di sini"/>*/}
-                    {/*            </FormGroup>*/}
-                    {/*        </Col>*/}
-                    {/*        <Col md={6}>*/}
-                    {/*            <FormGroup>*/}
-                    {/*                <Label>ID Staf</Label>*/}
-                    {/*                <Input type="text"*/}
-                    {/*                       name={'staffId'}*/}
-                    {/*                       value={this.state.modalData.staffId} readOnly*/}
-                    {/*                       placeholder="Taip di sini"/>*/}
-                    {/*            </FormGroup>*/}
-                    {/*        </Col>*/}
-                    {/*        <Col md={6}>*/}
-                    {/*            <FormGroup>*/}
-                    {/*                <Label>Tarikh Lantikan</Label>*/}
-                    {/*                <Input type="text"*/}
-                    {/*                       name={'dateAssigned'}*/}
-                    {/*                       value={this.state.modalData.dateAssigned} readOnly*/}
-                    {/*                       placeholder="Taip di sini"/>*/}
-                    {/*            </FormGroup>*/}
-                    {/*        </Col>*/}
-                    {/*        <Col md={6}>*/}
-                    {/*            <FormGroup>*/}
-                    {/*                <Label>Tarikh Mula</Label>*/}
-                    {/*                <Input type="text"*/}
-                    {/*                       name={'dateStart'}*/}
-                    {/*                       value={this.state.modalData.dateStart} readOnly*/}
-                    {/*                       placeholder="Taip di sini"/>*/}
-                    {/*            </FormGroup>*/}
-                    {/*        </Col>*/}
-                    {/*        <Col md={6}>*/}
-                    {/*            <FormGroup>*/}
-                    {/*                <Label>Tarikh Akhir</Label>*/}
-                    {/*                <Input type="text"*/}
-                    {/*                       name={'dateEnd'}*/}
-                    {/*                       value={this.state.modalData.dateEnd} readOnly*/}
-                    {/*                       placeholder="Taip di sini"/>*/}
-                    {/*            </FormGroup>*/}
-                    {/*        </Col>*/}
-                    {/*        <Col md={12}>*/}
-                    {/*            <FormGroup>*/}
-                    {/*                <Label>Jawatan Pentadbiran</Label>*/}
-                    {/*                <Input type="text"*/}
-                    {/*                       name={'jawatanPentadbiran'}*/}
-                    {/*                       value={this.state.modalData.jawatanPentadbiran} readOnly*/}
-                    {/*                       placeholder="Taip di sini"/>*/}
-                    {/*            </FormGroup>*/}
-                    {/*        </Col>*/}
-                    {/*        <Col md={6}>*/}
-                    {/*            <FormGroup>*/}
-                    {/*                <Label>Jawatan Gred</Label>*/}
-                    {/*                <Input type="text"*/}
-                    {/*                       name={'jawatanGred'}*/}
-                    {/*                       value={this.state.modalData.jawatanGred} readOnly*/}
-                    {/*                       placeholder="Taip di sini"/>*/}
-                    {/*            </FormGroup>*/}
-                    {/*        </Col>*/}
-                    {/*        <Col md={6}>*/}
-                    {/*            <FormGroup>*/}
-                    {/*                <Label>Jawatan Lantikan</Label>*/}
-                    {/*                <Input type="text"*/}
-                    {/*                       name={'jawatanLantikan'}*/}
-                    {/*                       value={this.state.modalData.jawatanLantikan} readOnly*/}
-                    {/*                       placeholder="Taip di sini"/>*/}
-                    {/*            </FormGroup>*/}
-                    {/*        </Col>*/}
-                    {/*        <Col md={12}>*/}
-                    {/*            <FormGroup>*/}
-                    {/*                <Label>Jawatan Generik</Label>*/}
-                    {/*                <Input type="text"*/}
-                    {/*                       name={'jawatanGenerik'}*/}
-                    {/*                       value={this.state.modalData.jawatanGenerik} readOnly*/}
-                    {/*                       placeholder="Taip di sini"/>*/}
-                    {/*            </FormGroup>*/}
-                    {/*        </Col>*/}
-                    {/*        <Col md={12}>*/}
-                    {/*            <FormGroup>*/}
-                    {/*                <Label>Catatan</Label>*/}
-                    {/*                <Input type="text"*/}
-                    {/*                       name={'description'}*/}
-                    {/*                       value={this.state.modalData.description} readOnly*/}
-                    {/*                       placeholder="Taip di sini"/>*/}
-                    {/*            </FormGroup>*/}
-                    {/*        </Col>*/}
-                    {/*        <Col md={6}>*/}
-                    {/*            <FormGroup>*/}
-                    {/*                <Label>Nombor Rujukan Surat Lantikan</Label>*/}
-                    {/*                <Input type="text"*/}
-                    {/*                       name={'referenceNo'}*/}
-                    {/*                       value={this.state.modalData.referenceNo} readOnly*/}
-                    {/*                       placeholder="Taip di sini"/>*/}
-                    {/*            </FormGroup>*/}
-                    {/*        </Col>*/}
-                    {/*        <Col md={6}>*/}
-                    {/*            <FormGroup>*/}
-                    {/*                <Label>Tarikh Surat Lantikan</Label>*/}
-                    {/*                <Input type="text"*/}
-                    {/*                       name={'dateLetterLantikan'}*/}
-                    {/*                       value={this.state.modalData.dateLetterLantikan} readOnly*/}
-                    {/*                       placeholder="Taip di sini"/>*/}
-                    {/*            </FormGroup>*/}
-                    {/*        </Col>*/}
-                    {/*    </Row>*/}
-                    {/*</div>*/}
-                    {/*</Container>*/}
-
                     <div className="book" id="layoutCert">
 
                         <div className="page">
@@ -360,8 +245,40 @@ export default class PdfModal extends React.Component {
                                             {/*<span style={headerBold}>Borang Lantikan</span><br/>*/}
                                             {/*<span style={headerBold}>(Timbang Dan Sukat)</span><br/>*/}
                                             <span
-                                                style={headerSmall}>PERAKUAN PENENTUAN SUART PERLANTIKAN</span><br/>
-
+                                                style={headerBold}> <strong>{this.state.modalData.staffName ? this.state.modalData.staffName.toUpperCase(): this.state.modalData.staffName}</strong>
+                                            </span>
+                                            <br/>
+                                            <span
+                                                style={headerBold}> <strong>FAKULTI KEJURUTERAAN</strong>
+                                            </span>
+                                            <br/>
+                                            <br/>
+                                            <span
+                                                style={headerBold}> <strong>LANTIKKAN SEBAGAI PANEL PENILAI TEKNIKAL PENILAIAN PROPOSAL UTMER 2021/1 NICHE AREA SMART DIGITAL COMMUNITY</strong>
+                                            </span>
+                                            <br/>
+                                            <br/>
+                                            <span
+                                                style={headerNormal}> Saya dengan segala hormatnya merujuk kepada perkara di atas
+                                            </span>
+                                            <br/>
+                                            <br/>
+                                            <span
+                                                style={headerNormal}> 2&ensp; Seting-tinggi penghargaan dan tahniah diucapkan di atas lantikan sebagai panel teknikal dalam membantu menyemak serta menilaiproposal UTMER 2021/1 di bawah
+                                                Niche Area SMART DIGITAL COMMUNITY.&nbspDiharapkan agar penilaian yang telah dibuat membantu meningkatkan kualiti proposal terutama dalam aspek teknologi yang berkaitan dan memastikan projek
+                                                yang berkualiti sahaja yang terpilih.
+                                            </span>
+                                            <br/>
+                                            <br/>
+                                            <span
+                                                style={headerNormal}> 3&ensp; Kerjasama Ybhg. Prof/Prof. Madya/Dr.,didahului dengan ucapan ribuan terima kasih.
+                                            </span>
+                                            <br/>
+                                            <br/>
+                                            <br/>
+                                            <span
+                                                style={headerNormal}>Yang Benar
+                                            </span>
                                             {/*<span*/}
                                             {/*    style={headerNormal}>AKTA TIMBANG DAN SUKAT 1972</span><br/>*/}
                                             {/*<span*/}
@@ -384,7 +301,7 @@ export default class PdfModal extends React.Component {
 
                                     <Col sm={12}>
                                         <div style={{textAlign: 'left'}}>
-
+                                            {/*BOB KALAU X PAKAI DELETE LA BAWAH NI,AKU NAK TUNJK MCM MANA NK MASUKKAN DATA DALAM SURAT NI JE*/}
                                             <span
                                                 style={headerNormal}>
                                                 &ensp;&ensp;&ensp;&ensp;&ensp; Adalah dengan ini diperakui bahawa
