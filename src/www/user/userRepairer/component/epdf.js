@@ -241,9 +241,15 @@ export default class PdfModal extends React.Component {
                             <div className="subpage"><Form>
                                 <FormGroup row>
                                     <Col sm={12}>
+                                        <Col sm={12}>
+                                            <div style={{textAlign: 'right'}}>
+                                                <span style={headerBold}>Nombor Rujukan Surat Lantikan : {this.state.modalData.referenceNo}</span><br/>
+                                                <span style={headerBold}>Tarikh Surat Lantikan : {this.state.modalData.dateLetterLantikan}</span><br/>
+                                                <span style={headerBold}>Tarikh Lantikan : {this.state.modalData.dateAssigned}</span><br/>
+                                                <br/><br/>
+                                            </div>
+                                        </Col>
                                         <div style={{textAlign: 'left'}}>
-                                            {/*<span style={headerBold}>Borang Lantikan</span><br/>*/}
-                                            {/*<span style={headerBold}>(Timbang Dan Sukat)</span><br/>*/}
                                             <span
                                                 style={headerBold}> <strong>{this.state.modalData.staffName ? this.state.modalData.staffName.toUpperCase(): this.state.modalData.staffName}</strong>
                                             </span>
@@ -254,8 +260,11 @@ export default class PdfModal extends React.Component {
                                             <br/>
                                             <br/>
                                             <span
-                                                style={headerBold}> <strong>LANTIKKAN SEBAGAI PANEL PENILAI TEKNIKAL PENILAIAN PROPOSAL UTMER 2021/1 NICHE AREA SMART DIGITAL COMMUNITY</strong>
+                                                style={headerBold}> <strong>LANTIKKAN SEBAGAI {this.state.modalData.jawatanPentadbiran}</strong>
                                             </span>
+                                            {/*<span*/}
+                                            {/*    style={headerBold}> <strong>LANTIKKAN SEBAGAI PANEL PENILAI TEKNIKAL PENILAIAN PROPOSAL UTMER 2021/1 NICHE AREA SMART DIGITAL COMMUNITY</strong>*/}
+                                            {/*</span>*/}
                                             <br/>
                                             <br/>
                                             <span
@@ -264,9 +273,10 @@ export default class PdfModal extends React.Component {
                                             <br/>
                                             <br/>
                                             <span
-                                                style={headerNormal}> 2&ensp; Seting-tinggi penghargaan dan tahniah diucapkan di atas lantikan sebagai panel teknikal dalam membantu menyemak serta menilaiproposal UTMER 2021/1 di bawah
-                                                Niche Area SMART DIGITAL COMMUNITY.&nbsp; Diharapkan agar penilaian yang telah dibuat membantu meningkatkan kualiti proposal terutama dalam aspek teknologi yang berkaitan dan memastikan projek
-                                                yang berkualiti sahaja yang terpilih.
+                                                style={headerNormal}> 2&ensp; Setinggi-tinggi penghargaan dan tahniah diucapkan di atas lantikan sebagai {this.state.modalData.jawatanPentadbiran}, {this.state.modalData.jawatanGred}, &nbsp;
+                                                {this.state.modalData.jawatanGenerik} di bawah {this.state.modalData.jawatanLantikan} pada tarikh {this.state.modalData.dateStart} sehingga {this.state.modalData.dateEnd} .&nbsp;
+                                                {/*Diharapkan agar penilaian yang telah dibuat membantu meningkatkan kualiti proposal terutama dalam aspek teknologi yang berkaitan dan memastikan projek*/}
+                                                {/*yang berkualiti sahaja yang terpilih.*/}
                                             </span>
                                             <br/>
                                             <br/>
@@ -279,148 +289,38 @@ export default class PdfModal extends React.Component {
                                             <span
                                                 style={headerNormal}>Yang Benar
                                             </span>
-                                            {/*<span*/}
-                                            {/*    style={headerNormal}>AKTA TIMBANG DAN SUKAT 1972</span><br/>*/}
-                                            {/*<span*/}
-                                            {/*    style={headerSmall}>PERATURAN-PERATURAN TIMBANG DAN SUKAT 1981</span><br/>*/}
-                                            {/*<span style={headerSmall}>(Peraturan 16, 28A dan 45)</span>*/}
+
                                         </div>
                                     </Col>
                                 </FormGroup>
                                 {/*<FormGroup row>*/}
                                 {/*    <Col sm={12}>*/}
-                                {/*        <div style={{textAlign: 'center'}}>*/}
-
-                                {/*    <span*/}
-                                {/*        style={headerNormal}>1111111111111111</span><br/>*/}
-
+                                {/*        <div style={{textAlign: 'left'}}>*/}
+                                {/*            <span*/}
+                                {/*                style={headerNormal}>*/}
+                                {/*                &ensp;&ensp;&ensp;&ensp;&ensp; Adalah dengan ini diperakui bahawa*/}
+                                {/*                ID Staff : {this.state.modalData.staffId},*/}
+                                {/*                Tarikh Lantikan : {this.state.modalData.dateAssigned} ,*/}
+                                {/*                Tarikh Mula : {this.state.modalData.dateStart},*/}
+                                {/*                Tarikh Akhir : {this.state.modalData.dateEnd},*/}
+                                {/*                Jawatan Pentadbiran : {this.state.modalData.jawatanPentadbiran},*/}
+                                {/*                Jawatan Gred : {this.state.modalData.jawatanGred},*/}
+                                {/*                Jawatan Lantikan : {this.state.modalData.jawatanLantikan},*/}
+                                {/*                Jawatan Generik : {this.state.modalData.jawatanGenerik},*/}
+                                {/*                Catatan : {this.state.modalData.description},*/}
+                                {/*                Nombor Rujukan Surat Lantikan : {this.state.modalData.referenceNo},*/}
+                                {/*                Tarikh Surat Lantikan : {this.state.modalData.dateLetterLantikan} Telah Menerima Lantikan bla bla bla bla,*/}
+                                {/*            </span>*/}
+                                {/*            <br/>*/}
+                                {/*            <br/> /!*ALAMAT CHECK*!/*/}
                                 {/*        </div>*/}
                                 {/*    </Col>*/}
                                 {/*</FormGroup>*/}
-                                <FormGroup row>
-
-                                    <Col sm={12}>
-                                        <div style={{textAlign: 'left'}}>
-                                            {/*BOB KALAU X PAKAI DELETE LA BAWAH NI,AKU NAK TUNJK MCM MANA NK MASUKKAN DATA DALAM SURAT NI JE*/}
-                                            <span
-                                                style={headerNormal}>
-                                                &ensp;&ensp;&ensp;&ensp;&ensp; Adalah dengan ini diperakui bahawa
-                                                ID Staff : {this.state.modalData.staffId},
-                                                Tarikh Lantikan : {this.state.modalData.dateAssigned} ,
-                                                Tarikh Mula : {this.state.modalData.dateStart},
-                                                Tarikh Akhir : {this.state.modalData.dateEnd},
-                                                Jawatan Pentadbiran : {this.state.modalData.jawatanPentadbiran},
-                                                Jawatan Gred : {this.state.modalData.jawatanGred},
-                                                Jawatan Lantikan : {this.state.modalData.jawatanLantikan},
-                                                Jawatan Generik : {this.state.modalData.jawatanGenerik},
-                                                Catatan : {this.state.modalData.description},
-                                                Nombor Rujukan Surat Lantikan : {this.state.modalData.referenceNo},
-                                                Tarikh Surat Lantikan : {this.state.modalData.dateLetterLantikan} Telah Menerima Lantikan bla bla bla bla,
-                                            </span>
-                                            <br/>
-                                            <br/> {/*ALAMAT CHECK*/}
-                                        </div>
-                                    </Col>
-
-                                    {/*<Col sm={12}>*/}
-                                    {/*    <div style={{textAlign: 'left'}}>*/}
-                                    {/*        <span style={headerNormal}>Adalah dengan ini diperakui bahawa -</span><br/>*/}
-                                    {/*    </div>*/}
-                                    {/*</Col>*/}
-                                    {/*<Col sm={12}>*/}
-                                    {/*    <div style={{textAlign: 'center'}}>*/}
-                                    
-                                    {/*        <span*/}
-                                    {/*            style={headerNormal}>Nama : {this.state.modalData.staffName}</span><br/>*/}
-                                    
-                                    {/*    </div>*/}
-                                    {/*</Col>*/}
-                                    {/*<Col sm={6}>*/}
-                                    {/*    <div style={{textAlign: 'center'}}>*/}
-                                    {/*        <span*/}
-                                    {/*            style={headerNormal}>ID Staff : {this.state.modalData.staffId}</span><br/>*/}
-                                    
-                                    {/*    </div>*/}
-                                    {/*</Col>*/}
-                                    {/*<Col sm={6}>*/}
-                                    {/*    <div style={{textAlign: 'center'}}>*/}
-                                    {/*        <span*/}
-                                    {/*            style={headerNormal}>Tarikh Lantikan : {this.state.modalData.dateAssigned}</span><br/>*/}
-                                    
-                                    {/*    </div>*/}
-                                    {/*</Col>*/}
-                                    {/*<Col sm={6}>*/}
-                                    {/*    <div style={{textAlign: 'center'}}>*/}
-                                    {/*        <span*/}
-                                    {/*            style={headerNormal}>Tarikh Mula : {this.state.modalData.dateStart}</span><br/>*/}
-                                    
-                                    {/*    </div>*/}
-                                    {/*</Col>*/}
-                                    {/*<Col sm={6}>*/}
-                                    {/*    <div style={{textAlign: 'center'}}>*/}
-                                    {/*        <span*/}
-                                    {/*            style={headerNormal}>Tarikh Akhir : {this.state.modalData.dateEnd}</span><br/>*/}
-                                    
-                                    {/*    </div>*/}
-                                    {/*</Col>*/}
-                                    {/*<Col sm={6}>*/}
-                                    {/*    <div style={{textAlign: 'center'}}>*/}
-                                    {/*        <span*/}
-                                    {/*            style={headerNormal}>Jawatan Pentadbiran : {this.state.modalData.jawatanPentadbiran}</span><br/>*/}
-                                    
-                                    {/*    </div>*/}
-                                    {/*</Col>*/}
-                                    {/*<Col sm={6}>*/}
-                                    {/*    <div style={{textAlign: 'center'}}>*/}
-                                    {/*        <span*/}
-                                    {/*            style={headerNormal}>Jawatan Gred : {this.state.modalData.jawatanGred}</span><br/>*/}
-                                    
-                                    {/*    </div>*/}
-                                    {/*</Col>*/}
-                                    {/*<Col sm={6}>*/}
-                                    {/*    <div style={{textAlign: 'center'}}>*/}
-                                    {/*        <span*/}
-                                    {/*            style={headerNormal}>Jawatan Lantikan : {this.state.modalData.jawatanLantikan}</span><br/>*/}
-                                    
-                                    {/*    </div>*/}
-                                    {/*</Col>*/}
-                                    {/*<Col sm={6}>*/}
-                                    {/*    <div style={{textAlign: 'center'}}>*/}
-                                    {/*        <span*/}
-                                    {/*            style={headerNormal}>Jawatan Generik : {this.state.modalData.jawatanGenerik}</span><br/>*/}
-                                    
-                                    {/*    </div>*/}
-                                    {/*</Col>*/}
-                                    
-                                    
-                                    {/*<Col sm={12}>*/}
-                                    {/*    <div style={{textAlign: 'center'}}>*/}
-                                    {/*        <span*/}
-                                    {/*            style={headerNormal}>Catatan : {this.state.modalData.description}</span><br/>*/}
-                                    
-                                    {/*    </div>*/}
-                                    {/*</Col>*/}
-                                    {/*<Col sm={6}>*/}
-                                    {/*    <div style={{textAlign: 'center'}}>*/}
-                                    {/*        <span*/}
-                                    {/*            style={headerNormal}>Nombor Rujukan Surat Lantikan : {this.state.modalData.referenceNo}</span><br/>*/}
-                                    
-                                    {/*    </div>*/}
-                                    {/*</Col>*/}
-                                    {/*<Col sm={6}>*/}
-                                    {/*    <div style={{textAlign: 'center'}}>*/}
-                                    {/*        <span*/}
-                                    {/*            style={headerNormal}>Tarikh Surat Lantikan : {this.state.modalData.dateLetterLantikan}</span><br/>*/}
-                                    
-                                    {/*    </div>*/}
-                                    {/*</Col>*/}
-                                </FormGroup>
                                 <br/>
                                 <FormGroup row>
                                     <Col sm={12}>
                                         <div style={{textAlign: 'center'}}>
-                                                            <span
-                                                                style={headerNormal}> *Cetakan Berkomputer* </span>
+                                            <span style={headerNormal}> *Cetakan Berkomputer* </span>
                                         </div>
                                     </Col>
                                 </FormGroup>
@@ -434,7 +334,7 @@ export default class PdfModal extends React.Component {
                             style={{width: '140px'}}
                             onClick={this.printCert}
                     ><i
-                        className="lnr-checkmark-circle btn-icon-wrapper"> </i>Confirm</Button>
+                        className="lnr-checkmark-circle btn-icon-wrapper"> </i>Muat Turun</Button>
                     <Button color="danger" className='mb-2 mr-2 btn-icon btn-shadow btn-outline-2x'
                             style={{width: '140px'}} outline onClick={this.hideModalEdit}> <i
                         className="lnr-cross-circle btn-icon-wrapper"> </i> Tutup</Button>
